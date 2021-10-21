@@ -25,6 +25,10 @@ public class PersonDTO {
         return uuid;
     }
 
+    public String getIssn() {
+        return issn;
+    }
+
     public String getFirstName() {
         return firstName;
     }

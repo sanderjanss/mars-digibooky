@@ -4,7 +4,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.UUID;
 
-public abstract class Person {
+public class Person {
 
     private final UUID uuid;
     private final String issn;
