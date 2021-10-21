@@ -19,8 +19,17 @@ public class BookRepository {
         this.booksById = new ConcurrentHashMap<>();
 
         //TESTDATA
-        Book book1 = new Book("9475640394564", "De Alchemist", new Author("Paulo", "Caulo"), "Blablabla");
-        Book book2 = new Book("846574859675", "Het Verdriet van België", new Author("Paulo", "Caulo"), "Blablabla");
+        Book book1 = new Book("c340f6c3-014c-4b22-9698-9758f32e6cd1",
+                "9475640394564",
+                "De Alchemist",
+                new Author("Paulo", "Caulo"),
+                "Blablabla");
+        Book book2 = new Book( "86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
+                "846574859675",
+                "Het Verdriet van België",
+                new Author("Paulo",
+                        "Caulo"),
+                "Blablabla");
         this.booksById.put(book1.getUuid(), book1);
         this.booksById.put(book2.getUuid(), book2);
     }
@@ -29,11 +38,20 @@ public class BookRepository {
         return this.booksById.values();
     }
 
-    public Book getBookById(String uuid) throws BookDoesNotExistException {
+    public Book getBookById(String uuid){
         var foundBook = this.booksById.get(uuid);
         if(foundBook == null) {
             throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
         }
         return foundBook;
     }
+
+    //TODO
+//    public Book getBookByISBN(String isbn){
+//        var foundBook = this.booksById.get(uuid);
+//        if(foundBook == null) {
+//            throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
+//        }
+//        return foundBook;
+//    }
 }
