@@ -30,6 +30,10 @@ public class BookRepository {
     }
 
     public Book getBookById(String uuid) throws BookDoesNotExistException {
-        return booksById.get(uuid);
+        var foundBook = this.booksById.get(uuid);
+        if(foundBook == null) {
+            throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
+        }
+        return foundBook;
     }
 }

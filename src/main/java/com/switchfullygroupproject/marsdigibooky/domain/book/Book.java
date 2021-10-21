@@ -2,14 +2,18 @@ package com.switchfullygroupproject.marsdigibooky.domain.book;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 
+import java.util.UUID;
+
 public class Book {
 
+    private String uuid;
     private String ISBN;
     private String title;
     private Author author;
     private String summary;
 
     public Book(String ISBN, String title, Author author, String summary) {
+        this.uuid = UUID.randomUUID().toString();
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;

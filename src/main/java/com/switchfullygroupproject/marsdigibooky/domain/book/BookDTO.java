@@ -4,17 +4,10 @@ import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 
 public class BookDTO {
 
+    private String uuid;
     private String ISBN;
     private String title;
     private Author author;
-
-
-    public BookDTO(String ISBN, String title, Author author) {
-        this.ISBN = ISBN;
-        this.title = title;
-        this.author = author;
-
-    }
 
     public String getISBN() {
         return ISBN;
