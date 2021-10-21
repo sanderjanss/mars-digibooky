@@ -32,13 +32,7 @@ public class BookController {
         this.logger = LoggerFactory.getLogger(BookController.class);
     }
 
-    @GetMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public List<BookDTO> getAllBooks() {
-        return this.bookService.getAllBooks();
-    }
-
-    @GetMapping(path = "/{uuid}", produces = "application/json")
+    @GetMapping(path = "/{uuid}",  produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDetailDTO getBookById(@PathVariable String uuid) {
         try {
@@ -48,4 +42,19 @@ public class BookController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bdnee.getMessage());
         }
     }
+
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookDetailDTO> getBooks(@RequestParam(name = "isbn", required = false) String isbnOrNull,
+                                        @RequestParam(name="title", required = false) String titleOrNull) {
+
+        try {
+            return this.bookService.getAllBooks(isbnOrNull, titleOrNull);
+        } catch (BookDoesNotExistException bdnee) {
+            logger.error(bdnee.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bdnee.getMessage());
+        }
+    }
+
+
 }

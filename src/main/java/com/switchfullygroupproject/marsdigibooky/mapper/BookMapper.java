@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 @Component
 public class BookMapper {
 
-    public List<BookDTO> toBookDTO(List<Book> bookList) {
+    public List<BookDetailDTO> toBookDTO(List<Book> bookList) {
         return bookList.stream()
-                .map(this::toBookDTO)
+                .map(this::toBookDetailDTO)
                 .collect(Collectors.toList());
     }
 
