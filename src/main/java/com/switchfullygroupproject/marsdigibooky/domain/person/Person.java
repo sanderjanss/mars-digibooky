@@ -7,15 +7,15 @@ import java.util.UUID;
 public class Person {
 
     private final String uuid;
-    private final String issn;
+    private final String inss;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
 
 
-    public Person(String ISSN, String firstName, String lastName, String emailAdress) {
+    public Person(String inss, String firstName, String lastName, String emailAdress) {
         this.uuid = UUID.randomUUID().toString();
-        this.issn = ISSN;
+        this.inss = inss;
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
@@ -26,8 +26,8 @@ public class Person {
         return uuid;
     }
 
-    public String getIssn() {
-        return issn;
+    public String getInss() {
+        return inss;
     }
 
     public String getFirstName() {

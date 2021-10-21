@@ -25,8 +25,9 @@ public class PersonDTO {
         return uuid;
     }
 
-    public String getIssn() {
-        return issn;
+    @JsonIgnore
+    public String getInss() {
+        return inss;
     }
 
     public String getFirstName() {
