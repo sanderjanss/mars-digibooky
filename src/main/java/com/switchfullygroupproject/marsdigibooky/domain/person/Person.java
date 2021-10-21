@@ -7,7 +7,7 @@ import java.util.UUID;
 public abstract class Person {
 
     private final UUID uuid;
-    private final String ISSN;
+    private final String issn;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
@@ -15,7 +15,7 @@ public abstract class Person {
 
     public Person(UUID uuid, String ISSN, String firstName, String lastName, String emailAdress) {
         this.uuid = uuid;
-        this.ISSN = ISSN;
+        this.issn = ISSN;
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
@@ -26,8 +26,8 @@ public abstract class Person {
         return uuid;
     }
 
-    public String getISSN() {
-        return ISSN;
+    public String getIssn() {
+        return issn;
     }
 
     public String getFirstName() {
