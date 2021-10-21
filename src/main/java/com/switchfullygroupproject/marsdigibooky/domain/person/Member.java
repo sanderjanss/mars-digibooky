@@ -8,8 +8,8 @@ public class Member extends Person {
 
     private final Address address;
 
-    public Member(UUID uuid, String firstName, String lastName, String emailAdress, Address address) {
-        super(uuid, firstName, lastName, emailAdress);
+    public Member(UUID uuid, String issn, String firstName, String lastName, String emailAdress, Address address) {
+        super(uuid, issn, firstName, lastName, emailAdress);
         this.address = address;
     }
 

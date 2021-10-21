@@ -6,13 +6,15 @@ import java.util.UUID;
 
 public class PersonDTO {
     private final UUID uuid;
+    private final String issn;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
 
 
-    public PersonDTO(UUID uuid, String firstName, String lastName, String emailAdress) {
+    public PersonDTO(UUID uuid, String issn, String firstName, String lastName, String emailAdress) {
         this.uuid = uuid;
+        this.issn = issn;
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
