@@ -45,12 +45,16 @@ public class BookController {
 
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<BookDetailDTO> getBooks(@RequestParam(name = "isbn", required = false) String isbnOrNull) {
+    public List<BookDetailDTO> getBooks(@RequestParam(name = "isbn", required = false) String isbnOrNull,
+                                        @RequestParam(name="title", required = false) String titleOrNull) {
+
         try {
-            return this.bookService.getAllBooks(isbnOrNull);
+            return this.bookService.getAllBooks(isbnOrNull, titleOrNull);
         } catch (BookDoesNotExistException bdnee) {
             logger.error(bdnee.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bdnee.getMessage());
         }
     }
+
+
 }

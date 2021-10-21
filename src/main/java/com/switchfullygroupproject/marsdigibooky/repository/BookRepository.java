@@ -37,9 +37,10 @@ public class BookRepository {
         this.booksById.put(book2.getUuid(), book2);
     }
 
-    public Collection<Book> getAllBooks(String isbnOrNull) {
+    public Collection<Book> getAllBooks(String isbnOrNull, String titleOrNull) {
         return this.booksById.entrySet().stream()
                 .filter(set -> isbnOrNull == null || set.getValue().getISBN().equals(isbnOrNull))
+                .filter(set -> titleOrNull == null || set.getValue().getTitle().equalsIgnoreCase(titleOrNull))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
     }
