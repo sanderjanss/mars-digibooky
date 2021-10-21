@@ -7,8 +7,8 @@ import javax.mail.internet.InternetAddress;
 import java.util.UUID;
 
 public class PersonDTO {
-    private final String uuid;
-    private final String inss;
+    private String uuid;
+    private String inss;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
@@ -20,12 +20,21 @@ public class PersonDTO {
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
-
+    }
+    public PersonDTO(String firstName, String lastName, String emailAdress) {
+        this.uuid = UUID.randomUUID().toString();
+        this.firstName = firstName;
+        this.lastName = lastNameNotNull(lastName);
+        this.emailAdress = isValidEmailAddress(emailAdress);
     }
 
 
     public String getUuid() {
         return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     @JsonIgnore

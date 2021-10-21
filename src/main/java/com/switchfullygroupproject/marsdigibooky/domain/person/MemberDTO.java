@@ -9,6 +9,10 @@ public class MemberDTO extends PersonDTO{
         super(issn, firstName, lastName, emailAdress);
         this.address = address;
     }
+    public MemberDTO(String firstName, String lastName, String emailAdress, Address address) {
+        super( firstName, lastName, emailAdress);
+        this.address = address;
+    }
 
     public Address getAddress() {
         return address;

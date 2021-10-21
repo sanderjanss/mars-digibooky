@@ -1,5 +1,7 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
+import com.switchfullygroupproject.marsdigibooky.domain.person.MemberDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
 import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
 import com.switchfullygroupproject.marsdigibooky.mapper.PersonMapper;
 import com.switchfullygroupproject.marsdigibooky.repository.PersonRepository;
@@ -26,6 +28,12 @@ public class PersonService {
     }
 
     public List<PersonDTO> findAllMembers(){
-        return personMapper.toDto(personRepository.findAllMembers());
+        return personMapper.toDtoWithoutInss(personRepository.findAllMembers());
+    }
+
+
+    public void registermember(MemberDTO memberDTO){
+         personRepository.registerMember(personMapper.toMember(memberDTO));
+
     }
 }

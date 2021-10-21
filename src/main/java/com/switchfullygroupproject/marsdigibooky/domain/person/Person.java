@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Person {
 
-    private final String uuid;
+    private String uuid;
     private final String inss;
     private final String firstName;
     private final String lastName;
@@ -20,6 +20,10 @@ public class Person {
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
 
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getUuid() {

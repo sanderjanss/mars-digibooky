@@ -24,7 +24,8 @@ public class PersonRepository {
                 new Address("meir", 1, "2610", "Antwerpen"));
         personDatabase.put(admin.getUuid(), admin);
         personDatabase.put(member.getUuid(), member);
-        logger.warn(String.valueOf(admin.getUuid()));
+        logger.warn(String.valueOf("admin: " + admin.getUuid()));
+        logger.warn(String.valueOf("member: " + member.getUuid()));
     }
 
     public Person findById(String uuid){
@@ -39,5 +40,10 @@ public class PersonRepository {
             }
         }
         return memberList;
+    }
+
+    public void registerMember(Member member){
+          personDatabase.put(member.getUuid(),member);
+          logger.warn("Repo: " + member.getUuid());
     }
 }
