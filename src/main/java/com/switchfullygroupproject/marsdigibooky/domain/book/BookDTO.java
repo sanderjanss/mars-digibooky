@@ -28,5 +28,23 @@ public class BookDTO {
         return author;
     }
 
+    public BookDTO setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
+    }
 
+    public BookDTO setISBN(String ISBN) {
+        this.ISBN = ISBN;
+        return this;
+    }
+
+    public BookDTO setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public BookDTO setAuthor(Author author) {
+        this.author = author;
+        return this;
+    }
 }

@@ -16,6 +16,10 @@ public class BookDetailDTO {
         this.summary = summary;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
     public String getISBN() {
         return ISBN;
     }

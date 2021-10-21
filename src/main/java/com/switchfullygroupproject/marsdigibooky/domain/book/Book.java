@@ -16,6 +16,18 @@ public class Book {
         this.summary = summary;
     }
 
+    public Book(String uuid, String ISBN, String title, Author author, String summary) {
+        this.uuid = uuid;
+        this.ISBN = ISBN;
+        this.title = title;
+        this.author = author;
+        this.summary = summary;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
     public String getISBN() {
         return ISBN;
     }
