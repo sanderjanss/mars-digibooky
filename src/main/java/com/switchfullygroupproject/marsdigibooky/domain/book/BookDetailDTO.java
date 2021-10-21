@@ -35,4 +35,29 @@ public class BookDetailDTO {
     public String getSummary() {
         return summary;
     }
+
+    public BookDetailDTO setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
+    }
+
+    public BookDetailDTO setISBN(String ISBN) {
+        this.ISBN = ISBN;
+        return this;
+    }
+
+    public BookDetailDTO setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public BookDetailDTO setAuthor(Author author) {
+        this.author = author;
+        return this;
+    }
+
+    public BookDetailDTO setSummary(String summary) {
+        this.summary = summary;
+        return this;
+    }
 }

@@ -3,6 +3,7 @@ package com.switchfullygroupproject.marsdigibooky.repository;
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -25,5 +26,9 @@ public class BookRepository {
 
     public Collection<Book> getAllBooks() {
         return this.booksById.values();
+    }
+
+    public Book getBookById(String uuid) {
+        return booksById.get(uuid);
     }
 }

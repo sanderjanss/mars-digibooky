@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 @Component
 public class BookMapper {
 
-    public List<BookDTO> toDTO (List<Book> bookList) {
+    public List<BookDTO> toBookDTO(List<Book> bookList) {
         return bookList.stream()
-                .map(this::toDTO)
+                .map(this::toBookDTO)
                 .collect(Collectors.toList());
     }
 
-    public BookDTO toDTO(Book book) {
+    public BookDTO toBookDTO(Book book) {
         return new BookDTO()
                 .setUuid(book.getUuid())
                 .setISBN(book.getISBN())
@@ -28,6 +28,15 @@ public class BookMapper {
 
     public Book toBook(BookDetailDTO bookDetailDTO) {
         return new Book(bookDetailDTO.getUuid(), bookDetailDTO.getISBN(), bookDetailDTO.getTitle(), bookDetailDTO.getAuthor(), bookDetailDTO.getSummary());
+    }
+
+    public BookDetailDTO toBookDetailDTO(Book book) {
+        return new BookDetailDTO()
+                .setUuid(book.getUuid())
+                .setISBN(book.getISBN())
+                .setTitle(book.getTitle())
+                .setAuthor(book.getAuthor())
+                .setSummary(book.getSummary());
     }
 
 }

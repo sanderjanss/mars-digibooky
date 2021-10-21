@@ -1,6 +1,8 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
+import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import com.switchfullygroupproject.marsdigibooky.repository.BookRepository;
 import com.switchfullygroupproject.marsdigibooky.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,19 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
+    @Autowired
     public BookService(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
     }
 
-    @Autowired
     public List<BookDTO> getAllBooks() {
-        return bookMapper.toDTO(bookRepository.getAllBooks().stream().collect(Collectors.toList()));
+        return bookMapper.toBookDTO(bookRepository.getAllBooks().stream().collect(Collectors.toList()));
     }
+
+    public BookDetailDTO getBookById(String uuid) {
+        return bookMapper.toBookDetailDTO(bookRepository.getBookById(uuid));
+    }
+
+
 }
