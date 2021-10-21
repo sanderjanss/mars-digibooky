@@ -4,6 +4,7 @@ import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
+import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -28,7 +29,7 @@ public class BookRepository {
         return this.booksById.values();
     }
 
-    public Book getBookById(String uuid) {
+    public Book getBookById(String uuid) throws BookDoesNotExistException {
         return booksById.get(uuid);
     }
 }
