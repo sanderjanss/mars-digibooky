@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Librarian extends Person {
 
-    public Librarian(UUID uuid, String issn, String firstName, String lastName, String emailAdress) {
-        super(uuid, issn, firstName, lastName, emailAdress);
+    public Librarian(String issn, String firstName, String lastName, String emailAdress) {
+        super(issn, firstName, lastName, emailAdress);
     }
 }

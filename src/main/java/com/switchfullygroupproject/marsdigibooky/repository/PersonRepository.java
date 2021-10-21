@@ -1,27 +1,43 @@
 package com.switchfullygroupproject.marsdigibooky.repository;
 
-import com.switchfullygroupproject.marsdigibooky.domain.person.Admin;
-import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
-import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.person.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 @Repository
 public class PersonRepository {
 
-    private final Map<UUID, Person> personDatabase;
+    private final Map<String, Person> personDatabase;
+    public final Logger logger =  LoggerFactory.getLogger(PersonRepository.class);
 
     public PersonRepository() {
         this.personDatabase = new ConcurrentHashMap<>();
-        UUID uuid = UUID.randomUUID();
-        Person admin = new Admin(uuid,"4455","Mars","Man","marsman@heelal.com");
-        personDatabase.put(uuid, admin);
+
+        Person admin = new Admin("4455","Mars","Man","marsman@heelal.com");
+
+        Person member = new Member("1","Mars","Vrouw","marsvrouw@heelal.com",
+                new Address("meir", 1, "2610", "Antwerpen"));
+        personDatabase.put(admin.getUuid(), admin);
+        personDatabase.put(member.getUuid(), member);
+        logger.warn(String.valueOf(admin.getUuid()));
     }
 
-    public List<Person> findAll(){
-        return new ArrayList<>(personDatabase.values());
+    public Person findById(String uuid){
+        return personDatabase.get(uuid);
+    }
+
+    public List<Person> findAllMembers(){
+        List<Person> memberList = new ArrayList<>();
+        for (Map.Entry<String, Person> entry : personDatabase.entrySet()) {
+            if (entry.getValue() instanceof Member){
+                memberList.add(entry.getValue());
+            }
+        }
+        return memberList;
     }
 }

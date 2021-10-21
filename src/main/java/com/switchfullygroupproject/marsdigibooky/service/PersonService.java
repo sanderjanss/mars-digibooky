@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PersonService {
@@ -20,7 +21,11 @@ public class PersonService {
         this.personMapper = personMapper;
     }
 
-    public List<PersonDTO> findAll(){
-        return personMapper.toDto(personRepository.findAll());
+    public PersonDTO findById(String uuid){
+        return personMapper.toDto(personRepository.findById(uuid));
+    }
+
+    public List<PersonDTO> findAllMembers(){
+        return personMapper.toDto(personRepository.findAllMembers());
     }
 }

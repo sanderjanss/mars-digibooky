@@ -13,11 +13,11 @@ public class PersonMapper {
         return professorList.stream().map(this::toDto).collect(Collectors.toList());
     }
     public PersonDTO toDto(Person person) {
-        return new PersonDTO(person.getUuid(),person.getIssn(), person.getFirstName(), person.getLastName(),person.getEmailAdress());
+        return new PersonDTO(person.getIssn(), person.getFirstName(), person.getLastName(),person.getEmailAdress());
     }
 
     public Person toPerson(PersonDTO personDTO) {
-        return new Person(personDTO.getUuid(), personDTO.getIssn(), personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmailAdress());
+        return new Person(personDTO.getIssn(), personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmailAdress());
 
     }
 

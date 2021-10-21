@@ -6,15 +6,15 @@ import java.util.UUID;
 
 public class Person {
 
-    private final UUID uuid;
+    private final String uuid;
     private final String issn;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
 
 
-    public Person(UUID uuid, String ISSN, String firstName, String lastName, String emailAdress) {
-        this.uuid = uuid;
+    public Person(String ISSN, String firstName, String lastName, String emailAdress) {
+        this.uuid = UUID.randomUUID().toString();
         this.issn = ISSN;
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
@@ -22,7 +22,7 @@ public class Person {
 
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
