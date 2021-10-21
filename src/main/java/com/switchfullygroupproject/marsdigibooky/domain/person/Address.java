@@ -9,8 +9,8 @@ public class Address {
     public Address(String streetName, int houseNumber, String postalCode, String city) {
         this.streetName = streetName;
         this.houseNumber = houseNumber;
-        this.postalCode = postalCode;
         this.city = city;
+        this.postalCode = postalCode;
     }
 
     public String getStreetName() {
@@ -27,5 +27,12 @@ public class Address {
 
     public String getCity() {
         return city;
+    }
+
+    public String cityNotNull(String city) {
+        if(!(city == null)){
+            return city;
+        }
+        throw new IllegalArgumentException("City cant be null.");
     }
 }
