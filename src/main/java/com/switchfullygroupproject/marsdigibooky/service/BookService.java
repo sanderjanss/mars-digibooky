@@ -26,13 +26,11 @@ public class BookService {
         this.bookMapper = bookMapper;
     }
 
-    public List<BookDTO> getAllBooks() {
-        return bookMapper.toBookDTO(bookRepository.getAllBooks().stream().collect(Collectors.toList()));
+    public List<BookDetailDTO> getAllBooks(String isbnOrNull) {
+        return bookMapper.toBookDTO(bookRepository.getAllBooks(isbnOrNull).stream().toList());
     }
 
     public BookDetailDTO getBookById(String uuid) {
         return bookMapper.toBookDetailDTO(bookRepository.getBookById(uuid));
     }
-
-
 }

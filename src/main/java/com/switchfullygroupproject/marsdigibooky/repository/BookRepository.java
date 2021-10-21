@@ -8,7 +8,10 @@ import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistExce
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Component
 public class BookRepository {
@@ -34,8 +37,11 @@ public class BookRepository {
         this.booksById.put(book2.getUuid(), book2);
     }
 
-    public Collection<Book> getAllBooks() {
-        return this.booksById.values();
+    public Collection<Book> getAllBooks(String isbnOrNull) {
+        return this.booksById.entrySet().stream()
+                .filter(set -> isbnOrNull == null || set.getValue().getISBN().equals(isbnOrNull))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
     }
 
     public Book getBookById(String uuid){
@@ -45,13 +51,4 @@ public class BookRepository {
         }
         return foundBook;
     }
-
-    //TODO
-//    public Book getBookByISBN(String isbn){
-//        var foundBook = this.booksById.get(uuid);
-//        if(foundBook == null) {
-//            throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
-//        }
-//        return foundBook;
-//    }
 }
