@@ -5,8 +5,8 @@ import java.util.UUID;
 public class MemberDTO extends PersonDTO{
     private final Address address;
 
-    public MemberDTO(UUID uuid, String issn, String firstName, String lastName, String emailAdress, Address address) {
-        super(uuid, issn, firstName, lastName, emailAdress);
+    public MemberDTO(String issn, String firstName, String lastName, String emailAdress, Address address) {
+        super(issn, firstName, lastName, emailAdress);
         this.address = address;
     }
 

@@ -1,27 +1,30 @@
 package com.switchfullygroupproject.marsdigibooky.domain.person;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.UUID;
 
 public class PersonDTO {
-    private final UUID uuid;
-    private final String issn;
+    private final String uuid;
+    private final String inss;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
 
 
-    public PersonDTO(UUID uuid, String issn, String firstName, String lastName, String emailAdress) {
-        this.uuid = uuid;
-        this.issn = issn;
+    public PersonDTO(String inss, String firstName, String lastName, String emailAdress) {
+        this.uuid = UUID.randomUUID().toString();
+        this.inss = inss;
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
 
     }
 
-    public UUID getUuid() {
+
+    public String getUuid() {
         return uuid;
     }
 
