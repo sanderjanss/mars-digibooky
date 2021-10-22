@@ -44,4 +44,8 @@ public class BookService {
     public void softDeleteBook(String uuidBook) {
         this.bookRepository.softDeleteBook(uuidBook);
     }
+
+    public void unDeleteBook(String uuidBook) {
+        this.bookRepository.unDeleteBook(uuidBook);
+    }
 }

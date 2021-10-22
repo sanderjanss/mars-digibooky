@@ -70,4 +70,9 @@ public class BookRepository {
         var book = getBookById(uuid);
         book.setShowableToUser(false);
     }
+
+    public void unDeleteBook(String uuidBook) {
+        var book = getBookByIdAsLibrarian(uuidBook);
+        book.setShowableToUser(true);
+    }
 }

@@ -39,13 +39,25 @@ public class LibrarianController {
     }
 
     @DeleteMapping(path = "/{uuidLibrarian}/deletebook/{uuidBook}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.GONE)
     public void deleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
         try{
             personService.findById(uuidLibrarian);
-            this.bookService.softDeleteBook(uuidBook);
-            logger.info(String.format("Book %s deleted", uuidBook ));
-        } catch (PersonDoesnotExistException exception) {
+            this.bookService.deleteBook(uuidBook);
+            logger.info(String.format("Book %s deleted", uuidBook));
+        } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
+        }
+    }
+
+    @PutMapping(path = "/{uuidLibrarian}/undeletebook/{uuidBook}")
+    @ResponseStatus(HttpStatus.OK)
+    public void undeleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
+        try {
+            personService.findById(uuidLibrarian);
+            this.bookService.unDeleteBook(uuidBook);
+            logger.info(String.format("Book %s undeleted", uuidBook));
+        } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
     }
