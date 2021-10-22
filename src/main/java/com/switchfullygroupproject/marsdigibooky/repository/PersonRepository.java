@@ -35,6 +35,10 @@ public class PersonRepository {
         logger.warn("librarian: " + librarian.getUuid());
     }
 
+    public boolean contains(String uuid){
+        return personDatabaseV2.containsKey(uuid);
+    }
+
     public Person findById(String uuid){
         var foundPerson = this.personDatabaseV2.get(uuid);
         if(foundPerson == null) {
