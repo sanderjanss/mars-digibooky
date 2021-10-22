@@ -83,4 +83,12 @@ public class BookRepository {
         var book = getBookByIdAsLibrarian(uuidBook);
         book.setShowableToUser(true);
     }
+
+
+
+    //HELPER METHODS
+
+    public boolean contains(String uuid){
+        return booksById.containsKey(uuid);
+    }
 }
