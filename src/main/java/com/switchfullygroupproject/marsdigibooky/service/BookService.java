@@ -26,8 +26,8 @@ public class BookService {
         this.bookMapper = bookMapper;
     }
 
-    public List<BookDetailDTO> getAllBooks(String isbnOrNull, String titleOrNull) {
-        return bookMapper.toBookDTO(bookRepository.getAllBooks(isbnOrNull, titleOrNull).stream().toList());
+    public List<BookDetailDTO> getAllBooks(String isbnOrNull, String titleOrNull, String authorFirstNameOrNull, String authorLastNameOrNull) {
+        return bookMapper.toBookDTO(bookRepository.getAllBooks(isbnOrNull, titleOrNull, authorFirstNameOrNull, authorLastNameOrNull).stream().toList());
     }
 
     public BookDetailDTO getBookById(String uuid) {

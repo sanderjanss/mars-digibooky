@@ -1,5 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
+import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
@@ -46,10 +47,12 @@ public class BookController {
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<BookDetailDTO> getBooks(@RequestParam(name = "isbn", required = false) String isbnOrNull,
-                                        @RequestParam(name="title", required = false) String titleOrNull) {
+                                        @RequestParam(name= "title", required = false) String titleOrNull,
+                                        @RequestParam(name= "authorFirstName", required = false) String firstNameOrNull,
+                                        @RequestParam(name= "authorLastName", required = false) String lastNameOrNull) {
 
         try {
-            return this.bookService.getAllBooks(isbnOrNull, titleOrNull);
+            return this.bookService.getAllBooks(isbnOrNull, titleOrNull, firstNameOrNull, lastNameOrNull);
         } catch (BookDoesNotExistException bdnee) {
             logger.error(bdnee.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bdnee.getMessage());
