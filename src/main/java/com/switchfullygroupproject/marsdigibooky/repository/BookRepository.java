@@ -2,13 +2,11 @@ package com.switchfullygroupproject.marsdigibooky.repository;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
+import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -33,14 +31,21 @@ public class BookRepository {
                 new Author("Paulo",
                         "Caulo"),
                 "Blablabla");
+        Book book3 = new Book( "86c5e7a3-d0e2-48bd-bfdb-b04e0324df4f",
+                "89113256423",
+                "Sapiens",
+                new Author("Yuval Noah",
+                        "Harari"),
+                "Blablabla");
         this.booksById.put(book1.getUuid(), book1);
         this.booksById.put(book2.getUuid(), book2);
+        this.booksById.put(book3.getUuid(), book3);
     }
 
     public Collection<Book> getAllBooks(String isbnOrNull, String titleOrNull, String authorFirstNameOrNull, String authorLastNameOrNull) {
         return this.booksById.entrySet().stream()
-                .filter(set -> isbnOrNull == null || set.getValue().getISBN().equals(isbnOrNull))
-                .filter(set -> titleOrNull == null || set.getValue().getTitle().equalsIgnoreCase(titleOrNull))
+                .filter(set -> (isbnOrNull == null || WildCardValidator.match(isbnOrNull, set.getValue().getISBN())) || set.getValue().getISBN().equals(isbnOrNull))
+                .filter(set -> (titleOrNull == null || WildCardValidator.match(titleOrNull, set.getValue().getTitle())) || set.getValue().getTitle().equalsIgnoreCase(titleOrNull))
                 .filter(set -> authorFirstNameOrNull == null || set.getValue().getAuthor().getFirstName().equalsIgnoreCase(authorFirstNameOrNull))
                 .filter(set -> authorLastNameOrNull == null || set.getValue().getAuthor().getLastName().equalsIgnoreCase(authorLastNameOrNull))
                 .map(Map.Entry::getValue)

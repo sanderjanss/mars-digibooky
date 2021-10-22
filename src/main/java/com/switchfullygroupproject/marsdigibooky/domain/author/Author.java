@@ -1,8 +1,8 @@
 package com.switchfullygroupproject.marsdigibooky.domain.author;
 
 public class Author {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
     public Author(String firstName, String lastName) {
         this.firstName = firstName;

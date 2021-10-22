@@ -6,11 +6,12 @@ import java.util.UUID;
 
 public class Book {
 
-    private String uuid;
-    private String ISBN;
-    private String title;
-    private Author author;
-    private String summary;
+
+    private final String uuid;
+    private final String ISBN;
+    private final String title;
+    private final Author author;
+    private final String summary;
 
     public Book(String ISBN, String title, Author author, String summary) {
         this.uuid = UUID.randomUUID().toString();
@@ -47,6 +48,4 @@ public class Book {
     public String getSummary() {
         return summary;
     }
-
-
 }

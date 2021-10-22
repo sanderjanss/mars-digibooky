@@ -9,6 +9,10 @@ public class BookDTO {
     private String title;
     private Author author;
 
+    public String getUuid() {
+        return uuid;
+    }
+
     public String getISBN() {
         return ISBN;
     }
