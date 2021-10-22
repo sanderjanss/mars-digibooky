@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class Person {
     private String uuid;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final String inss;
     private final String firstName;
     private final String lastName;
@@ -72,7 +73,7 @@ public class Person {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
-           throw new IllegalArgumentException("Not a valid emailAdress");
+            throw new InvalidUserException("Not a valid emailAdress");
         }
         return email;
     }
