@@ -11,6 +11,7 @@ public class Book {
     private final String title;
     private final Author author;
     private final String summary;
+    private boolean isRented;
     private boolean isShowableToUser;
 
     public Book(String isbn, String title, Author author, String summary) {
@@ -20,6 +21,7 @@ public class Book {
         this.author = author;
         this.summary = summary;
         this.isShowableToUser = true;
+        this.isRented = false;
     }
 
     public Book(String uuid, String isbn, String title, Author author, String summary) {
@@ -29,6 +31,7 @@ public class Book {
         this.author = author;
         this.summary = summary;
         this.isShowableToUser = true;
+        this.isRented = false;
     }
 
     public String getUuid() {
@@ -51,8 +54,16 @@ public class Book {
         return summary;
     }
 
+    public boolean isRented() {
+        return isRented;
+    }
+
     public boolean isShowableToUser() {
         return isShowableToUser;
+    }
+
+    public void setRented(boolean rented) {
+        isRented = rented;
     }
 
     public void setShowableToUser(boolean showableToUser) {
