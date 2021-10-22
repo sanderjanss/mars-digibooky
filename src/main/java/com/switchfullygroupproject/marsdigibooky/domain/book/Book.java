@@ -6,24 +6,23 @@ import java.util.UUID;
 
 public class Book {
 
-
     private final String uuid;
-    private final String ISBN;
+    private final String isbn;
     private final String title;
     private final Author author;
     private final String summary;
 
-    public Book(String ISBN, String title, Author author, String summary) {
+    public Book(String isbn, String title, Author author, String summary) {
         this.uuid = UUID.randomUUID().toString();
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.summary = summary;
     }
 
-    public Book(String uuid, String ISBN, String title, Author author, String summary) {
+    public Book(String uuid, String isbn, String title, Author author, String summary) {
         this.uuid = uuid;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.summary = summary;
@@ -33,8 +32,8 @@ public class Book {
         return uuid;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
     public String getTitle() {

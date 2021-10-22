@@ -6,11 +6,9 @@ import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
-import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -48,7 +46,7 @@ public class BookRepository {
 
     public Collection<Book> getAllBooks(String isbnOrNull, String titleOrNull, String authorFirstNameOrNull, String authorLastNameOrNull) {
         return this.booksById.entrySet().stream()
-                .filter(set -> isbnOrNull == null || WildCardValidator.match(isbnOrNull, set.getValue().getISBN()))
+                .filter(set -> isbnOrNull == null || WildCardValidator.match(isbnOrNull, set.getValue().getIsbn()))
                 .filter(set -> titleOrNull == null || WildCardValidator.match(titleOrNull, set.getValue().getTitle()))
                 .filter(set -> (authorFirstNameOrNull == null || WildCardValidator.match(authorFirstNameOrNull, set.getValue().getAuthor().getFirstName())))
                 .filter(set -> (authorLastNameOrNull == null || WildCardValidator.match(authorLastNameOrNull, set.getValue().getAuthor().getLastName())))
