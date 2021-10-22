@@ -2,6 +2,7 @@ package com.switchfullygroupproject.marsdigibooky.controller;
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.UpdateBookDTO;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.service.BookService;
@@ -60,6 +61,12 @@ public class LibrarianController {
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
+    }
+
+    @PutMapping(path = "/{uuidLibrarian}/updatebook/{uuidBook}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO){
+
     }
 
 
