@@ -25,7 +25,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping(path = "{/uuid}", produces = "application/json")
+    @GetMapping(path = "/{uuid}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public PersonDTO findById(@PathVariable String uuid){
         return personService.findById(uuid);
