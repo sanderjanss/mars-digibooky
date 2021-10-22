@@ -2,8 +2,6 @@ package com.switchfullygroupproject.marsdigibooky.repository;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
 import org.springframework.stereotype.Component;
@@ -60,5 +58,10 @@ public class BookRepository {
             throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
         }
         return foundBook;
+    }
+
+    public Book registerBook(Book book) {
+        this.booksById.put(book.getUuid(), book);
+        return book;
     }
 }

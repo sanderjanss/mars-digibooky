@@ -34,4 +34,11 @@ public class BookService {
     public BookDetailDTO getBookById(String uuid) {
         return bookMapper.toBookDetailDTO(bookRepository.getBookById(uuid));
     }
+
+    public BookDTO registerBook(CreateBookDTO createBookDTO) {
+        Book book = bookRepository.registerBook(this.bookMapper.toBook(createBookDTO));
+        return this.bookMapper.toBookDTO(book);
+    }
+
+ 
 }
