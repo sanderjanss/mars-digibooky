@@ -2,6 +2,7 @@ package com.switchfullygroupproject.marsdigibooky.repository;
 
 import com.switchfullygroupproject.marsdigibooky.domain.person.*;
 import com.switchfullygroupproject.marsdigibooky.exceptions.InvalidUserException;
+import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.exceptions.NoAuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,11 @@ public class PersonRepository {
     }
 
     public Person findById(String uuid){
-        return personDatabaseV2.get(uuid);
+        var foundPerson = this.personDatabaseV2.get(uuid);
+        if(foundPerson == null) {
+            throw new PersonDoesnotExistException(String.format("Person with id %s does not exist", uuid));
+        }
+        return foundPerson;
     }
 
     public List<Person> findAllMembers(){

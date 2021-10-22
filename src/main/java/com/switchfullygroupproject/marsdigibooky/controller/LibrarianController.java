@@ -1,9 +1,8 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
-import com.switchfullygroupproject.marsdigibooky.exceptions.LibrarianDoesnotExistException;
+import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.service.BookService;
 import com.switchfullygroupproject.marsdigibooky.service.PersonService;
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -31,12 +28,12 @@ public class LibrarianController {
     @PostMapping(path = "/{uuid}/registerbook", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerBook(@RequestBody CreateBookDTO createBookDTO, @PathVariable String uuid) {
-
-
-        if(personService.findById(uuid) == null) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Librarian does not exist");
+        try {
+            personService.findById(uuid);
+            BookDTO bookDTO = this.bookService.registerBook(createBookDTO);
+            logger.info(String.format("Book registered: %s", bookDTO.getUuid()));
+        } catch (PersonDoesnotExistException exception) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
-        BookDTO bookDTO = this.bookService.registerBook(createBookDTO);
-        logger.info(String.format("Book registered: %s", bookDTO.getUuid()));
     }
 }
