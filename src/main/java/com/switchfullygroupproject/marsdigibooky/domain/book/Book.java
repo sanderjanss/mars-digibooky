@@ -18,6 +18,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.summary = summary;
+        this.isShowableToUser = true;
     }
 
     public Book(String uuid, String isbn, String title, Author author, String summary) {
@@ -46,5 +47,13 @@ public class Book {
 
     public String getSummary() {
         return summary;
+    }
+
+    public boolean isShowableToUser() {
+        return isShowableToUser;
+    }
+
+    public void setShowableToUser(boolean showableToUser) {
+        isShowableToUser = showableToUser;
     }
 }

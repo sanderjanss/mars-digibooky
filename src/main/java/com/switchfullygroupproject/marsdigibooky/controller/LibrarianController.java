@@ -36,4 +36,18 @@ public class LibrarianController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
     }
+
+    @DeleteMapping(path = "/{uuidLibrarian}/deletebook/{uuidBook}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
+        try{
+            personService.findById(uuidLibrarian);
+            this.bookService.softDeleteBook(uuidBook);
+            logger.info(String.format("Book %s deleted", uuidBook ));
+        } catch (PersonDoesnotExistException exception) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
+        }
+    }
+
+
 }
