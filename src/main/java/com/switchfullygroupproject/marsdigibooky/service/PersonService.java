@@ -1,7 +1,5 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
-import com.switchfullygroupproject.marsdigibooky.domain.person.MemberDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
 import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
 import com.switchfullygroupproject.marsdigibooky.mapper.PersonMapper;
 import com.switchfullygroupproject.marsdigibooky.repository.PersonRepository;
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PersonService {
@@ -23,6 +20,7 @@ public class PersonService {
         this.personMapper = personMapper;
     }
 
+
     public PersonDTO findById(String uuid){
         return personMapper.toDto(personRepository.findById(uuid));
     }
@@ -32,8 +30,8 @@ public class PersonService {
     }
 
 
-    public void registermember(MemberDTO memberDTO){
-         personRepository.registerMember(personMapper.toMember(memberDTO));
+    public void registermember(PersonDTO memberDTO){
+        personRepository.registerMember(personMapper.toMember(memberDTO));
 
     }
 }

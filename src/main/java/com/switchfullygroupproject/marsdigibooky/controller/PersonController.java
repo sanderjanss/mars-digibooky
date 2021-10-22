@@ -1,8 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
-import com.switchfullygroupproject.marsdigibooky.domain.person.Address;
-import com.switchfullygroupproject.marsdigibooky.domain.person.MemberDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.person.*;
 import com.switchfullygroupproject.marsdigibooky.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +35,11 @@ public class PersonController {
         return personService.findAllMembers();
     }
 
-    @PostMapping( produces = "application/json")
+    @PostMapping( produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerMember(){
-        MemberDTO member = new MemberDTO("1234", "Myrthe", "Ververs", "Myrthe@ver.com",
-                new Address("Meir", 1, "2000", "Antwerp"));
-         personService.registermember(member);
-         logger.warn("Controller: " + member.getUuid());
+    public void registerMember(@RequestBody PersonDTO personDTO){
+         personService.registermember(personDTO);
+         logger.warn("Controller: " + personDTO.getUuid());
 
     }
 }

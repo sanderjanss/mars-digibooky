@@ -21,22 +21,14 @@ public class PersonMapper {
         return personDTO;
     }
 
-    public PersonDTO toDtoWithoutInss(Person person) {
-        PersonDTO personDTO = new PersonDTO(person.getFirstName(), person.getLastName(), person.getEmailAdress());
-        personDTO.setUuid(person.getUuid());
-        return personDTO;
-
-//        return new PersonDTO(person.getFirstName(), person.getLastName(),person.getEmailAdress());
-    }
-
     public Person toPerson(PersonDTO personDTO) {
-        return new Person(personDTO.getInss(), personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmailAdress());
+        return new Person(personDTO.getInss(), personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmailAdress(), personDTO.getAddress(), personDTO.getUser());
 
     }
 
-    public Member toMember(MemberDTO memberDTO) {
-        Member member = new Member(memberDTO.getInss(), memberDTO.getFirstName(), memberDTO.getLastName(), memberDTO.getEmailAdress(),
-                memberDTO.getAddress());
+    public Person toMember(PersonDTO memberDTO) {
+        Person member = new Person(memberDTO.getInss(), memberDTO.getFirstName(), memberDTO.getLastName(), memberDTO.getEmailAdress(),
+                memberDTO.getAddress(), memberDTO.getUser());
         member.setUuid(memberDTO.getUuid());
         return member;
 

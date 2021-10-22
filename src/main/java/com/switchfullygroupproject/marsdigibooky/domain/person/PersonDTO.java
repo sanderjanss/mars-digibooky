@@ -1,33 +1,35 @@
 package com.switchfullygroupproject.marsdigibooky.domain.person;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.switchfullygroupproject.marsdigibooky.exceptions.InvalidUserException;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.UUID;
 
 public class PersonDTO {
+
     private String uuid;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String inss;
     private final String firstName;
     private final String lastName;
     private final String emailAdress;
+    private final Address address;
 
 
-    public PersonDTO(String inss, String firstName, String lastName, String emailAdress) {
+    private final User user;
+
+
+    public PersonDTO(String inss, String firstName, String lastName, String emailAdress, Address address, User user) {
         this.uuid = UUID.randomUUID().toString();
         this.inss = inss;
         this.firstName = firstName;
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
+        this.user = user;
+        this.address=address;
     }
-    public PersonDTO(String firstName, String lastName, String emailAdress) {
-        this.uuid = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastNameNotNull(lastName);
-        this.emailAdress = isValidEmailAddress(emailAdress);
-    }
-
 
     public String getUuid() {
         return uuid;
@@ -37,7 +39,7 @@ public class PersonDTO {
         this.uuid = uuid;
     }
 
-    @JsonIgnore
+
     public String getInss() {
         return inss;
     }
@@ -54,11 +56,19 @@ public class PersonDTO {
         return emailAdress;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public String lastNameNotNull(String lastName) {
         if(!(lastName == null)){
             return lastName;
         }
-        throw new IllegalArgumentException("Last name cant be null.");
+        throw new InvalidUserException("Last name cant be null.");
     }
 
 
@@ -68,7 +78,7 @@ public class PersonDTO {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
-            throw new IllegalArgumentException("Not a valid emailAdress");
+            throw new InvalidUserException("Not a valid emailAdress");
         }
         return email;
     }
