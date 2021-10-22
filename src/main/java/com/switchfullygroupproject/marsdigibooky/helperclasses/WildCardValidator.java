@@ -1,6 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.helperclasses;
 
-public class ISBNValidator {
+public class WildCardValidator {
 
 
     public static boolean match(String first, String second)
