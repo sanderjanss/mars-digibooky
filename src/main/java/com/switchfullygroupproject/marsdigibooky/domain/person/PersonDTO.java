@@ -16,8 +16,6 @@ public class PersonDTO {
     private final String lastName;
     private final String emailAdress;
     private final Address address;
-
-
     private final User user;
 
 

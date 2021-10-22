@@ -1,6 +1,7 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
 import com.switchfullygroupproject.marsdigibooky.domain.person.*;
+import com.switchfullygroupproject.marsdigibooky.exceptions.NoAuthorizationException;
 import com.switchfullygroupproject.marsdigibooky.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,23 +24,14 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping(path = "/{uuid}", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public PersonDTO findById(@PathVariable String uuid){
-        return personService.findById(uuid);
-    }
-
-    @GetMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public List<PersonDTO> findAllMembers(){
-        return personService.findAllMembers();
-    }
-
-    @PostMapping( produces = "application/json", consumes = "application/json")
+    @PostMapping(path="/registermember", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerMember(@RequestBody PersonDTO personDTO){
-         personService.registermember(personDTO);
-         logger.warn("Controller: " + personDTO.getUuid());
-
+        if(personDTO.getUser() == User.MEMBER){
+            personService.registerMember(personDTO);
+        } else {
+            throw new NoAuthorizationException("Only members can register themselves.");
+        }
     }
+
 }

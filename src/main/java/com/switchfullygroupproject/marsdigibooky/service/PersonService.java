@@ -20,18 +20,19 @@ public class PersonService {
         this.personMapper = personMapper;
     }
 
-
     public PersonDTO findById(String uuid){
         return personMapper.toDto(personRepository.findById(uuid));
     }
 
     public List<PersonDTO> findAllMembers(){
-        return personMapper.toDtoWithoutInss(personRepository.findAllMembers());
+        return personMapper.toDto(personRepository.findAllMembers());
     }
 
 
-    public void registermember(PersonDTO memberDTO){
-        personRepository.registerMember(personMapper.toMember(memberDTO));
-
+    public void registerMember(PersonDTO personDTO){
+        personRepository.registerMember(personMapper.toPerson(personDTO));
+    }
+    public void registerAdmin(PersonDTO personDTO, String id){
+        personRepository.registerAdmin(personMapper.toPerson(personDTO), id);
     }
 }
