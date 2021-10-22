@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -40,9 +39,8 @@ public class BookService {
         return this.bookMapper.toBookDTO(book);
     }
 
-
-    public void softDeleteBook(String uuidBook) {
-        this.bookRepository.softDeleteBook(uuidBook);
+    public void deleteBook(String uuidBook) {
+        this.bookRepository.deleteBook(uuidBook);
     }
 
     public void unDeleteBook(String uuidBook) {

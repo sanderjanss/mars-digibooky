@@ -61,13 +61,21 @@ public class BookRepository {
         return foundBook;
     }
 
+    public Book getBookByIdAsLibrarian(String uuid){
+        var foundBook = this.booksById.get(uuid);
+        if(foundBook == null) {
+            throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
+        }
+        return foundBook;
+    }
+
     public Book registerBook(Book book) {
         this.booksById.put(book.getUuid(), book);
         return book;
     }
 
-    public void softDeleteBook(String uuid) {
-        var book = getBookById(uuid);
+    public void deleteBook(String uuid) {
+        var book = getBookByIdAsLibrarian(uuid);
         book.setShowableToUser(false);
     }
 

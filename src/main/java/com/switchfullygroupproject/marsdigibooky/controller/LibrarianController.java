@@ -41,7 +41,7 @@ public class LibrarianController {
     @DeleteMapping(path = "/{uuidLibrarian}/deletebook/{uuidBook}")
     @ResponseStatus(HttpStatus.GONE)
     public void deleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
-        try{
+        try {
             personService.findById(uuidLibrarian);
             this.bookService.deleteBook(uuidBook);
             logger.info(String.format("Book %s deleted", uuidBook));
