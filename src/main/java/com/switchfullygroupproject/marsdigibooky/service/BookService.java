@@ -40,5 +40,8 @@ public class BookService {
         return this.bookMapper.toBookDTO(book);
     }
 
- 
+
+    public void softDeleteBook(String uuidBook) {
+        this.bookRepository.softDeleteBook(uuidBook);
+    }
 }

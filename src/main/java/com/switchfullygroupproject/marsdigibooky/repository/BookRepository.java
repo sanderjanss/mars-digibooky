@@ -44,6 +44,7 @@ public class BookRepository {
 
     public Collection<Book> getAllBooks(String isbnOrNull, String titleOrNull, String authorFirstNameOrNull, String authorLastNameOrNull) {
         return this.booksById.entrySet().stream()
+                .filter(set -> set.getValue().isShowableToUser())
                 .filter(set -> isbnOrNull == null || WildCardValidator.match(isbnOrNull, set.getValue().getIsbn()))
                 .filter(set -> titleOrNull == null || WildCardValidator.match(titleOrNull, set.getValue().getTitle()))
                 .filter(set -> (authorFirstNameOrNull == null || WildCardValidator.match(authorFirstNameOrNull, set.getValue().getAuthor().getFirstName())))
@@ -54,7 +55,7 @@ public class BookRepository {
 
     public Book getBookById(String uuid){
         var foundBook = this.booksById.get(uuid);
-        if(foundBook == null) {
+        if(foundBook == null || !foundBook.isShowableToUser()) {
             throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
         }
         return foundBook;
@@ -63,5 +64,10 @@ public class BookRepository {
     public Book registerBook(Book book) {
         this.booksById.put(book.getUuid(), book);
         return book;
+    }
+
+    public void softDeleteBook(String uuid) {
+        var book = getBookById(uuid);
+        book.setShowableToUser(false);
     }
 }

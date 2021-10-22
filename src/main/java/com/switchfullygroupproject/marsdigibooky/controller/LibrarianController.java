@@ -2,6 +2,7 @@ package com.switchfullygroupproject.marsdigibooky.controller;
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
+import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.service.BookService;
 import com.switchfullygroupproject.marsdigibooky.service.PersonService;

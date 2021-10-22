@@ -11,6 +11,7 @@ public class Book {
     private final String title;
     private final Author author;
     private final String summary;
+    private boolean isShowableToUser;
 
     public Book(String isbn, String title, Author author, String summary) {
         this.uuid = UUID.randomUUID().toString();
@@ -27,6 +28,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.summary = summary;
+        this.isShowableToUser = true;
     }
 
     public String getUuid() {
