@@ -2,12 +2,14 @@ package com.switchfullygroupproject.marsdigibooky.domain.book;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 
+
 public class CreateBookDTO {
 
-    private String isbn;
-    private String title;
-    private Author author;
-    private String summary;
+    private  String isbn;
+    private  String title;
+    private  Author author;
+    private  String summary;
+
 
     public String getIsbn() {
         return isbn;
@@ -24,4 +26,7 @@ public class CreateBookDTO {
     public String getSummary() {
         return summary;
     }
+
+
+
 }

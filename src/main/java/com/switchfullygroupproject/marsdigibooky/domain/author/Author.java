@@ -6,7 +6,7 @@ public class Author {
 
     public Author(String firstName, String lastName) {
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.lastName = authorLastName(lastName);
     }
 
     public String getFirstName() {
@@ -16,4 +16,13 @@ public class Author {
     public String getLastName() {
         return lastName;
     }
+
+
+    public String authorLastName(String lastName) {
+        if(!(lastName == null)){
+            return lastName;
+        }
+        throw new IllegalArgumentException("Last name cant be null.");
+    }
+
 }

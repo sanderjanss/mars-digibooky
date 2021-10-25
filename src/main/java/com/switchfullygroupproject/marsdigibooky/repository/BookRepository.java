@@ -8,6 +8,7 @@ import com.switchfullygroupproject.marsdigibooky.domain.person.User;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +17,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
+
 public class BookRepository {
 
     private final ConcurrentHashMap<String, Book> booksById;
