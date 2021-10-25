@@ -56,7 +56,7 @@ public class LibrarianController {
         }
     }
 
-    @PutMapping(path = "/{uuidLibrarian}/undeletebook/{uuidBook}")
+    @PatchMapping(path = "/{uuidLibrarian}/undeletebook/{uuidBook}")
     @ResponseStatus(HttpStatus.OK)
     public void undeleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
         try {
