@@ -24,7 +24,6 @@ public class BookMapper {
     }
 
 
-
     public BookDTO toBookDTO(Book book) {
         return new BookDTO()
                 .setUuid(book.getUuid())
@@ -33,21 +32,17 @@ public class BookMapper {
                 .setAuthor(book.getAuthor());
     }
 
-    public Book toBook(BookDetailDTO bookDetailDTO) {
-        return new Book(bookDetailDTO.getUuid(), bookDetailDTO.getIsbn(), bookDetailDTO.getTitle(), bookDetailDTO.getAuthor(), bookDetailDTO.getSummary());
-    }
-
     public Book toBook(CreateBookDTO createBookDTO) {
         return new Book(createBookDTO.getIsbn(), createBookDTO.getTitle(), createBookDTO.getAuthor(), createBookDTO.getSummary());
     }
 
     public BookDetailDTO toBookDetailDTO(Book book) {
-            return new BookDetailDTO()
-                    .setUuid(book.getUuid())
-                    .setIsbn(book.getIsbn())
-                    .setTitle(book.getTitle())
-                    .setAuthor(book.getAuthor())
-                    .setSummary(book.getSummary());
+        return new BookDetailDTO()
+                .setUuid(book.getUuid())
+                .setIsbn(book.getIsbn())
+                .setTitle(book.getTitle())
+                .setAuthor(book.getAuthor())
+                .setSummary(book.getSummary());
     }
 
 

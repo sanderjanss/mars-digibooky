@@ -3,8 +3,7 @@ package com.switchfullygroupproject.marsdigibooky.helperclasses;
 public class WildCardValidator {
 
 
-    public static boolean match(String first, String second)
-    {
+    public static boolean match(String first, String second) {
 
         if (first.length() == 0 && second.length() == 0)
             return true;
@@ -26,7 +25,6 @@ public class WildCardValidator {
                     match(first, second.substring(1));
         return false;
     }
-
 
 
 }

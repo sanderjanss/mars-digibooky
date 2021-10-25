@@ -21,9 +21,4 @@ public class RentalMapper {
 
     }
 
-    public RentalDTO toDto(Rental rental) {
-        RentalDTO rentalDTO = new RentalDTO(rental.getPersonId(), rental.getBookId(), rental.getDueDate());
-        rentalDTO.setRentalId(rental.getRentalId());
-        return rentalDTO;
-    }
 }

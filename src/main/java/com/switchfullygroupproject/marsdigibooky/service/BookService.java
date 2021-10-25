@@ -58,11 +58,11 @@ public class BookService {
         this.bookRepository.updateBook(uuidBook, updatedBook);
     }
 
-    public BookDetailDTOV2 findBookIfRentedReturnBookDetailDTO(String memberId, String bookId){
-        if(personRepository.findById(memberId) == null){
+    public BookDetailDTOV2 findBookIfRentedReturnBookDetailDTO(String memberId, String bookId) {
+        if (personRepository.findById(memberId) == null) {
             throw new PersonDoesnotExistException("This person id does not exist.");
         }
-        if(bookRepository.getBookById(bookId).isRented()){
+        if (bookRepository.getBookById(bookId).isRented()) {
             Person person = personRepository.findById(rentalRepository.findPersonIdPerBookId(bookId));
             Book book = bookRepository.getBookById(bookId);
             return bookMapper.toBookDetailDTOV2(book, person);

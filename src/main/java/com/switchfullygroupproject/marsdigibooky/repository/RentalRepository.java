@@ -40,21 +40,21 @@ public class RentalRepository {
         return rentalsPerIdDatabase.get(rentalId);
     }
 
-    public List<String> findBookIdsPerUser(String memberId){
+    public List<String> findBookIdsPerUser(String memberId) {
         return rentalsPerIdDatabase.values().stream()
                 .filter(rental -> rental.getPersonId().equals(memberId))
                 .map(Rental::getBookId)
                 .toList();
     }
 
-    public List<String> findBookIdsThatAreOverDue(){
+    public List<String> findBookIdsThatAreOverDue() {
         return rentalsPerIdDatabase.values().stream()
                 .filter(rental -> rental.getDueDate().isBefore(LocalDate.now()))
                 .map(Rental::getBookId)
                 .toList();
     }
 
-    public String findPersonIdPerBookId(String bookId){
+    public String findPersonIdPerBookId(String bookId) {
         for (Map.Entry<String, Rental> entry : rentalsPerIdDatabase.entrySet()) {
             if (entry.getValue().getBookId().equals(bookId)) {
                 return entry.getValue().getPersonId();

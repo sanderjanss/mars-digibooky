@@ -75,7 +75,7 @@ public class Book {
         if (isbn == null) {
             throw new IllegalArgumentException("ISBN cant be null.");
         }
-        if(!ISBN13Validator.isValidISBN(isbn)) {
+        if (!ISBN13Validator.isValidISBN(isbn)) {
             throw new IllegalArgumentException("ISBN not valid");
         }
         return isbn;
@@ -85,7 +85,7 @@ public class Book {
         if (title == null) {
             throw new IllegalArgumentException("Title cant be null.");
         }
-            return title;
+        return title;
     }
 
 }

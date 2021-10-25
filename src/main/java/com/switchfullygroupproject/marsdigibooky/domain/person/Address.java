@@ -30,7 +30,7 @@ public class Address {
     }
 
     public String cityNotNull(String city) {
-        if(!(city == null)){
+        if (!(city == null)) {
             return city;
         }
         throw new IllegalArgumentException("City cant be null.");

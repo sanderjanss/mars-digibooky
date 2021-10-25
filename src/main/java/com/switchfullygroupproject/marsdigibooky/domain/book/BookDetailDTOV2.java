@@ -5,14 +5,13 @@ import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
 
 public class BookDetailDTOV2 {
 
-    private  String uuid;
-    private  String isbn;
-    private  String title;
-    private  Author author;
-    private  String summary;
-    private  boolean isRented;
-    private  String rentedBy;
-
+    private String uuid;
+    private String isbn;
+    private String title;
+    private Author author;
+    private String summary;
+    private boolean isRented;
+    private String rentedBy;
 
 
     public String getUuid() {

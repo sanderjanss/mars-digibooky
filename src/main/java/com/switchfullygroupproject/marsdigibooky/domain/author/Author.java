@@ -19,7 +19,7 @@ public class Author {
 
 
     public String authorLastName(String lastName) {
-        if(!(lastName == null)){
+        if (!(lastName == null)) {
             return lastName;
         }
         throw new IllegalArgumentException("Last name cant be null.");

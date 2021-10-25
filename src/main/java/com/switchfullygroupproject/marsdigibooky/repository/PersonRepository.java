@@ -58,13 +58,13 @@ public class PersonRepository {
     }
 
     public void registerMember(Person person) {
-        if (!userAllreadyPartOfDatabase(person)) {
+        if (userAllreadyPartOfDatabase(person)) {
             personsPerIdDatabase.put(person.getUuid(), person);
         }
     }
 
     public void registerAdmin(Person person) {
-        if (!userAllreadyPartOfDatabase(person)) {
+        if (userAllreadyPartOfDatabase(person)) {
             personsPerIdDatabase.put(person.getUuid(), person);
         }
     }
@@ -72,10 +72,10 @@ public class PersonRepository {
     private boolean userAllreadyPartOfDatabase(Person person) {
         for (Map.Entry<String, Person> entry : personsPerIdDatabase.entrySet()) {
             if (entry.getValue().getInss().equals(person.getInss()) || entry.getValue().getEmailAdress().equals(person.getEmailAdress())) {
-                throw new InvalidUserException("This user allready exists.");
+                throw new InvalidUserException("This user already exists.");
             }
         }
-        return false;
+        return true;
     }
 
 }

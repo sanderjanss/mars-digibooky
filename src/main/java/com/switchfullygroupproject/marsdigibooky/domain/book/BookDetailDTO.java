@@ -32,7 +32,6 @@ public class BookDetailDTO {
     }
 
 
-
     public BookDetailDTO setUuid(String uuid) {
         this.uuid = uuid;
         return this;

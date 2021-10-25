@@ -28,7 +28,6 @@ public class Person {
     }
 
 
-
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
@@ -62,12 +61,11 @@ public class Person {
     }
 
     public String lastNameNotNull(String lastName) {
-        if(!(lastName == null)){
+        if (!(lastName == null)) {
             return lastName;
         }
         throw new IllegalArgumentException("Last name cant be null.");
     }
-
 
 
     public String isValidEmailAddress(String email) {

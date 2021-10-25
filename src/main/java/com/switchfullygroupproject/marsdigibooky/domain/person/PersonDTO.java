@@ -26,7 +26,7 @@ public class PersonDTO {
         this.lastName = lastNameNotNull(lastName);
         this.emailAdress = isValidEmailAddress(emailAdress);
         this.user = user;
-        this.address=address;
+        this.address = address;
     }
 
     public String getUuid() {
@@ -63,12 +63,11 @@ public class PersonDTO {
     }
 
     public String lastNameNotNull(String lastName) {
-        if(!(lastName == null)){
+        if (!(lastName == null)) {
             return lastName;
         }
         throw new InvalidUserException("Last name cant be null.");
     }
-
 
 
     public String isValidEmailAddress(String email) {
