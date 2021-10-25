@@ -28,17 +28,17 @@ public class BookRepository {
 
         //TESTDATA
         Book book1 = new Book("c340f6c3-014c-4b22-9698-9758f32e6cd1",
-                "ISBN 978-2-12-345680-3",
+                "ISBN 978-9-51-345680-1",
                 "De Alchemist",
-                new Author("Paulo", "Caulo"),
-                "Blablabla");
-        book1.setRented(true);
+                new Author("Paulo", "Coelho"),
+                "De jonge schaapherder Santiago heeft één grote wens: " +
+                        "de wereld bereizen tot in alle uithoeken om zo uit te vinden hoe deze in elkaar zit");
         Book book2 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
                 "ISBN 978-2-12-345680-3",
                 "Het Verdriet van België",
-                new Author("Paulo",
-                        "Caulo"),
-                "Blablabla");
+                new Author("Hugo", "Claus"),
+                "Het verdriet van België omspant de periode 1939-1947: vrede, oorlog en vrede. " +
+                        "Louis Seynaeve is elf jaar en leerling op een nonneninternaat.");
         Book book3 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df4f",
                 "ISBN 978-2-12-345680-3",
                 "Sapiens",
@@ -48,6 +48,7 @@ public class BookRepository {
         this.booksById.put(book1.getUuid(), book1);
         this.booksById.put(book2.getUuid(), book2);
         this.booksById.put(book3.getUuid(), book3);
+        this.booksById.put(book4.getUuid(), book4);
     }
 
     public Collection<Book> getAllBooks(String isbnOrNull, String titleOrNull, String authorFirstNameOrNull, String authorLastNameOrNull) {
