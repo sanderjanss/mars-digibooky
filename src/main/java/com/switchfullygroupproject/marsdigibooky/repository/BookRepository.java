@@ -40,11 +40,20 @@ public class BookRepository {
                 "Het verdriet van België omspant de periode 1939-1947: vrede, oorlog en vrede. " +
                         "Louis Seynaeve is elf jaar en leerling op een nonneninternaat.");
         Book book3 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df4f",
-                "ISBN 978-2-12-345680-3",
+                "9780062316097",
                 "Sapiens",
-                new Author("Yuval Noah",
-                        "Harari"),
-                "Blablabla");
+                new Author("Yuval Noah", "Harari"),
+                "Yuval Noah Harari's book, 'Sapiens,' traces the origins, mechanisms, and effects of what we" +
+                        " think of as “human progress” from small bands of hunter gatherers 100,000 years ago to the" +
+                        " present-day global network through which our species has come to dominate the entire");
+        Book book4 = new Book("1560a964-d625-4832-bef7-6757b609a125",
+                "9781234567897",
+                "Harry Potter and the Philosopher 's Stone",
+                new Author("J.K.",
+                        "Rowling"),
+                "It is a story about Harry Potter, an orphan brought up by his aunt and uncle because his" +
+                        " parents were killed when he was a baby. Harry is unloved by his uncle and aunt but everything changes" +
+                        " when he is invited to join Hogwarts School of Witchcraft and Wizardry and he finds out he's a wizard");
         this.booksById.put(book1.getUuid(), book1);
         this.booksById.put(book2.getUuid(), book2);
         this.booksById.put(book3.getUuid(), book3);
