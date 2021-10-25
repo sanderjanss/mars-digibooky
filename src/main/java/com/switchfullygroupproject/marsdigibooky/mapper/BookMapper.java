@@ -56,5 +56,15 @@ public class BookMapper {
                 .setRented(book.isRented())
                 .setRentedBy(person.getFirstName() + " " + person.getLastName());
     }
+    public BookDetailDTOV2 toBookDetailDTOV2(Book book) {
+        return new BookDetailDTOV2()
+                .setUuid(book.getUuid())
+                .setIsbn(book.getIsbn())
+                .setTitle(book.getTitle())
+                .setAuthor(book.getAuthor())
+                .setSummary(book.getSummary())
+                .setRented(book.isRented())
+                .setRentedBy("Not rented.");
+    }
 
 }
