@@ -58,7 +58,8 @@ public class BookMapper {
                 .setTitle(book.getTitle())
                 .setAuthor(book.getAuthor())
                 .setSummary(book.getSummary())
-                .setPerson(person);
+                .setRented(book.isRented())
+                .setRentedBy(person.getFirstName() + " " + person.getLastName());
     }
 
 }

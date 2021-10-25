@@ -1,7 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
 
-import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.person.User;
 import com.switchfullygroupproject.marsdigibooky.exceptions.NoAuthorizationException;
@@ -16,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RentalService {
@@ -38,16 +35,6 @@ public class RentalService {
         this.rentalMapper = rentalMapper;
         this.bookMapper = bookMapper;
     }
-
-
-//    public void lendBook(String memberId, String bookId){
-//        if(personRepository.contains(memberId) && bookRepository.contains(bookId)){
-//            rentalRepository.lendBook(memberId, rentalMapper.toRental(memberId, bookId));
-//            bookRepository.updateRentalStatusToTrue(bookId);
-//        }
-//    }
-
-    ////////////////////////////////////////////////////////////////////////
 
     public void lendBook(String memberId, String bookId) {
         if (!personRepository.contains(memberId)) {
@@ -75,7 +62,7 @@ public class RentalService {
         bookRepository.updateRentalStatusToFalse(bookId);
     }
 
-    public List<BookDTO> findAllBooksPerMember(String librarianId, String memberId){
+    public List<BookDTO> findAllBooksPerMember(String librarianId, String memberId) {
         if (personRepository.findById(librarianId) == null) {
             throw new PersonDoesnotExistException("This librarian Id does not exist.");
         }
@@ -91,7 +78,7 @@ public class RentalService {
         return bookMapper.toBookDTO(bookRepository.getBooksByIds(rentalRepository.findBookIdsPerUser(memberId)));
     }
 
-    public List<BookDTO> findAllBooksThatAreOverDue(String librarianId){
+    public List<BookDTO> findAllBooksThatAreOverDue(String librarianId) {
         if (personRepository.findById(librarianId) == null) {
             throw new PersonDoesnotExistException("This librarian Id does not exist.");
         }
@@ -100,10 +87,6 @@ public class RentalService {
         }
         return bookMapper.toBookDTO(bookRepository.getBooksByIds(rentalRepository.findBookIdsThatAreOverDue()));
     }
-
-
-
-
 
 
 }

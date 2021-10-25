@@ -10,7 +10,8 @@ public class BookDetailDTOV2 {
     private  String title;
     private  Author author;
     private  String summary;
-    private Person person;
+    private  boolean isRented;
+    private  String rentedBy;
 
 
 
@@ -34,8 +35,12 @@ public class BookDetailDTOV2 {
         return summary;
     }
 
-    public Person getPerson() {
-        return person;
+    public boolean isRented() {
+        return isRented;
+    }
+
+    public String getRentedBy() {
+        return rentedBy;
     }
 
     public BookDetailDTOV2 setUuid(String uuid) {
@@ -63,8 +68,13 @@ public class BookDetailDTOV2 {
         return this;
     }
 
-    public BookDetailDTOV2 setPerson(Person person) {
-        this.person = person;
+    public BookDetailDTOV2 setRented(boolean rented) {
+        this.isRented = rented;
+        return this;
+    }
+
+    public BookDetailDTOV2 setRentedBy(String rentedBy) {
+        this.rentedBy = rentedBy;
         return this;
     }
 }

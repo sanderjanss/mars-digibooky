@@ -9,11 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 
 @Repository
@@ -60,30 +58,24 @@ public class PersonRepository {
     }
 
     public void registerMember(Person person) {
-        if (userAllreadyPartOfDatabase(person)) {
+        if (!userAllreadyPartOfDatabase(person)) {
             personsPerIdDatabase.put(person.getUuid(), person);
         }
     }
 
     public void registerAdmin(Person person) {
-            if (userAllreadyPartOfDatabase(person)) {
-                personsPerIdDatabase.put(person.getUuid(), person);
-            }
+        if (!userAllreadyPartOfDatabase(person)) {
+            personsPerIdDatabase.put(person.getUuid(), person);
+        }
     }
 
     private boolean userAllreadyPartOfDatabase(Person person) {
-        boolean test = false;
         for (Map.Entry<String, Person> entry : personsPerIdDatabase.entrySet()) {
             if (entry.getValue().getInss().equals(person.getInss()) || entry.getValue().getEmailAdress().equals(person.getEmailAdress())) {
-                test = true;
-                break;
+                throw new InvalidUserException("This user allready exists.");
             }
         }
-        if (!test) {
-            return true;
-        } else {
-            throw new InvalidUserException("This user allready exists.");
-        }
+        return false;
     }
 
 }

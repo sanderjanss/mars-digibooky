@@ -9,7 +9,7 @@ public class Address {
     public Address(String streetName, int houseNumber, String postalCode, String city) {
         this.streetName = streetName;
         this.houseNumber = houseNumber;
-        this.city = city;
+        this.city = cityNotNull(city);
         this.postalCode = postalCode;
     }
 

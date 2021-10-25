@@ -41,23 +41,17 @@ public class RentalRepository {
     }
 
     public List<String> findBookIdsPerUser(String memberId){
-        List<String> bookIds = new ArrayList<>();
-        for (Map.Entry<String, Rental> entry : rentalsPerIdDatabase.entrySet()) {
-            if (entry.getValue().getPersonId().equals(memberId)) {
-                bookIds.add(entry.getValue().getBookId());
-            }
-        }
-        return bookIds;
+        return rentalsPerIdDatabase.values().stream()
+                .filter(rental -> rental.getPersonId().equals(memberId))
+                .map(Rental::getBookId)
+                .toList();
     }
 
     public List<String> findBookIdsThatAreOverDue(){
-        List<String> overDueBooks = new ArrayList<>();
-        for (Map.Entry<String, Rental> entry : rentalsPerIdDatabase.entrySet()) {
-            if (entry.getValue().getDueDate().isBefore(LocalDate.now())) {
-                overDueBooks.add(entry.getValue().getBookId());
-            }
-        }
-        return overDueBooks;
+        return rentalsPerIdDatabase.values().stream()
+                .filter(rental -> rental.getDueDate().isBefore(LocalDate.now()))
+                .map(Rental::getBookId)
+                .toList();
     }
 
     public String findPersonIdPerBookId(String bookId){
