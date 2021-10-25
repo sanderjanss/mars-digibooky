@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Component
 public class BookRepository {
 
-    private ConcurrentHashMap<String, Book> booksById;
+    private final ConcurrentHashMap<String, Book> booksById;
 
     public BookRepository() {
         this.booksById = new ConcurrentHashMap<>();

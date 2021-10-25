@@ -27,11 +27,7 @@ public class PersonController {
     @PostMapping(path="/registermember", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerMember(@RequestBody PersonDTO personDTO){
-        if(personDTO.getUser() == User.MEMBER){
             personService.registerMember(personDTO);
-        } else {
-            throw new NoAuthorizationException("You can only register yourself as a member.");
-        }
     }
 
 }

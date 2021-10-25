@@ -1,4 +1,4 @@
-package com.switchfullygroupproject.marsdigibooky.domain;
+package com.switchfullygroupproject.marsdigibooky.domain.rental;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,19 +14,11 @@ public class Rental {
         this.rentalId = UUID.randomUUID().toString();
         this.personId = personId;
         this.bookId = bookId;
-        this.dueDate = dueDate;
+        this.dueDate = dueDate.plusWeeks(3);
     }
 
     public void setRentalId(String rentalId) {
         this.rentalId = rentalId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
-    }
-
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
     }
 
     public String getRentalId() {
