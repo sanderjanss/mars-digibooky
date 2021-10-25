@@ -34,12 +34,13 @@ public class BookMapper {
     }
 
     public BookDetailDTO toBookDetailDTO(Book book) {
-        return new BookDetailDTO()
-                .setUuid(book.getUuid())
-                .setIsbn(book.getIsbn())
-                .setTitle(book.getTitle())
-                .setAuthor(book.getAuthor())
-                .setSummary(book.getSummary());
+            return new BookDetailDTO()
+                    .setUuid(book.getUuid())
+                    .setIsbn(book.getIsbn())
+                    .setTitle(book.getTitle())
+                    .setAuthor(book.getAuthor())
+                    .setSummary(book.getSummary());
     }
+
 
 }

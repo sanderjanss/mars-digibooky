@@ -51,7 +51,7 @@ public class LibrarianController {
         try {
             personService.findById(uuidLibrarian);
             this.bookService.deleteBook(uuidBook);
-            logger.info(String.format("Book %s deleted", uuidBook));
+            logger.info(String.format("Book with id %s deleted", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
@@ -63,7 +63,7 @@ public class LibrarianController {
         try {
             personService.findById(uuidLibrarian);
             this.bookService.unDeleteBook(uuidBook);
-            logger.info(String.format("Book %s undeleted", uuidBook));
+            logger.info(String.format("Book with id %s undeleted", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
@@ -71,8 +71,15 @@ public class LibrarianController {
 
     @PutMapping(path = "/{uuidLibrarian}/updatebook/{uuidBook}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateBook(@PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO){
-        bookService.updateBook(uuidBook, updateBookDTO);
+    public void updateBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO){
+        try {
+            personService.findById(uuidLibrarian);
+            bookService.updateBook(uuidBook, updateBookDTO);
+            logger.info(String.format("Book with id %s updated", uuidBook));
+        } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
+        }
+
     }
 
 

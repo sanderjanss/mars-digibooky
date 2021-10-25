@@ -5,6 +5,7 @@ import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
 import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
 import com.switchfullygroupproject.marsdigibooky.repository.BookRepository;
 import com.switchfullygroupproject.marsdigibooky.mapper.BookMapper;
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,15 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final RentalService rentalService;
+    private final PersonService personService;
     private final BookMapper bookMapper;
 
     @Autowired
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository, PersonService personService, RentalService rentalService, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
+        this.personService = personService;
+        this.rentalService = rentalService;
         this.bookMapper = bookMapper;
     }
 
@@ -29,9 +34,6 @@ public class BookService {
         return bookMapper.toBookDTO(bookRepository.getAllBooks(isbnOrNull, titleOrNull, authorFirstNameOrNull, authorLastNameOrNull).stream().toList());
     }
 
-    public BookDetailDTO getBookById(String uuid) {
-        return bookMapper.toBookDetailDTO(bookRepository.getBookById(uuid));
-    }
 
     public BookDTO registerBook(CreateBookDTO createBookDTO) {
         Book book = bookRepository.registerBook(this.bookMapper.toBook(createBookDTO));

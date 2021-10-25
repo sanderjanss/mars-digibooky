@@ -4,8 +4,8 @@ import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 
 public class BookDetailDTO {
 
-    private  String uuid;
-    private  String isbn;
+    private String uuid;
+    private String isbn;
     private String title;
     private Author author;
     private String summary;
@@ -30,6 +30,8 @@ public class BookDetailDTO {
     public String getSummary() {
         return summary;
     }
+
+
 
     public BookDetailDTO setUuid(String uuid) {
         this.uuid = uuid;
