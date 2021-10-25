@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 public class AdminController {
     private final PersonService personService;
     public final Logger logger =  LoggerFactory.getLogger(PersonController.class);
@@ -35,17 +35,19 @@ public class AdminController {
     @GetMapping(path = "/{id}/allmembers", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<PersonDTO> findAllMembers(@PathVariable String id){
-        if(personService.findById(id).getUser() == User.ADMIN){
-            return personService.findAllMembers();
-        }
-        else {
+        if (personService.findById(id).getUser() != User.ADMIN) {
             throw new NoAuthorizationException("Only an Admin can access all members.");
+        } else {
+            return personService.findAllMembers();
         }
     }
 
     @PostMapping(path = "/{id}/registeradminorlibrarian", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerAdminOrLibrarian(@RequestBody PersonDTO personDTO, @PathVariable String id){
+        if (personService.findById(id).getUser() != User.ADMIN) {
+            throw new NoAuthorizationException("Only an admin can register admins and librarians.");
+        }
         if(personDTO.getUser() == User.ADMIN || personDTO.getUser() == User.LIBRARIAN){
             personService.registerAdmin(personDTO, id);
         } else {

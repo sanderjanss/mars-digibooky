@@ -25,13 +25,13 @@ public class BookRepository {
                 "De Alchemist",
                 new Author("Paulo", "Caulo"),
                 "Blablabla");
-        Book book2 = new Book( "86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
+        Book book2 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
                 "846574859675",
                 "Het Verdriet van België",
                 new Author("Paulo",
                         "Caulo"),
                 "Blablabla");
-        Book book3 = new Book( "86c5e7a3-d0e2-48bd-bfdb-b04e0324df4f",
+        Book book3 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df4f",
                 "89113256423",
                 "Sapiens",
                 new Author("Yuval Noah",
@@ -53,17 +53,17 @@ public class BookRepository {
                 .collect(Collectors.toList());
     }
 
-    public Book getBookById(String uuid){
+    public Book getBookById(String uuid) {
         var foundBook = this.booksById.get(uuid);
-        if(foundBook == null || !foundBook.isShowableToUser()) {
+        if (foundBook == null || !foundBook.isShowableToUser()) {
             throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
         }
         return foundBook;
     }
 
-    public Book getBookByIdAsLibrarian(String uuid){
+    public Book getBookByIdAsLibrarian(String uuid) {
         var foundBook = this.booksById.get(uuid);
-        if(foundBook == null) {
+        if (foundBook == null) {
             throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
         }
         return foundBook;
@@ -85,10 +85,17 @@ public class BookRepository {
     }
 
 
-
     //HELPER METHODS
 
-    public boolean contains(String uuid){
+    public boolean contains(String uuid) {
         return booksById.containsKey(uuid);
+    }
+
+    public void updateRentalStatusToTrue(String bookId) {
+        booksById.get(bookId).setRented(true);
+    }
+
+    public void updateRentalStatusToFalse(String bookId) {
+        booksById.get(bookId).setRented(false);
     }
 }

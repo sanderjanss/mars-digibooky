@@ -27,6 +27,8 @@ public class Person {
         this.user = user;
     }
 
+
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
@@ -76,5 +78,18 @@ public class Person {
             throw new InvalidUserException("Not a valid emailAdress");
         }
         return email;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "uuid='" + uuid + '\'' +
+                ", inss='" + inss + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", emailAdress='" + emailAdress + '\'' +
+                ", address=" + address +
+                ", user=" + user +
+                '}';
     }
 }

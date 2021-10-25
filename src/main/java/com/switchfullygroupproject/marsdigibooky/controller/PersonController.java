@@ -30,7 +30,7 @@ public class PersonController {
         if(personDTO.getUser() == User.MEMBER){
             personService.registerMember(personDTO);
         } else {
-            throw new NoAuthorizationException("Only members can register themselves.");
+            throw new NoAuthorizationException("You can only register yourself as a member.");
         }
     }
 

@@ -19,9 +19,24 @@ public class MemberController {
         this.rentalService = rentalService;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+//    @PostMapping(path = "/{memberId}/lendbook/{bookId}", consumes = "application/json", produces = "application/json")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void lendBook(String memberId, String bookId){
+//        rentalService.lendBook(memberId, bookId);
+//    }
+
+    /////////////////////////////////////////////////////////////////////////////:
+
+    @PostMapping(path = "/{memberId}/lendbookv2/{bookId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void lendBook(String memberId, String bookId){
-        rentalService.lendBook(memberId, bookId);
+    public void lendBookV2(@PathVariable String memberId, @PathVariable String bookId){
+        rentalService.lendBookV2(memberId, bookId);
     }
+
+    @PostMapping(path = "/returnbookv2/{rentalId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void returnBookV2(@PathVariable String rentalId){
+        rentalService.returnBookV2(rentalId);
+    }
+
 }

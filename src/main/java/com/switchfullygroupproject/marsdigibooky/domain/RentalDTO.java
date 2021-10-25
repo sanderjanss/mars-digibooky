@@ -5,20 +5,20 @@ import java.util.UUID;
 
 public class RentalDTO {
 
-    private String lendingId;
+    private String rentalId;
     private String personId;
     private String bookId;
-    private final LocalDate localDate;
+    private final LocalDate dueDate;
 
-    public RentalDTO(String personId, String bookId, LocalDate localDate) {
-        this.lendingId = UUID.randomUUID().toString();
+    public RentalDTO(String personId, String bookId, LocalDate dueDate) {
+        this.rentalId = UUID.randomUUID().toString();
         this.personId = personId;
         this.bookId = bookId;
-        this.localDate = localDate;
+        this.dueDate = dueDate;
     }
 
-    public void setLendingId(String lendingId) {
-        this.lendingId = lendingId;
+    public void setRentalId(String rentalId) {
+        this.rentalId = rentalId;
     }
 
     public void setPersonId(String personId) {
@@ -29,8 +29,8 @@ public class RentalDTO {
         this.bookId = bookId;
     }
 
-    public String getLendingId() {
-        return lendingId;
+    public String getRentalId() {
+        return rentalId;
     }
 
     public String getPersonId() {
@@ -41,7 +41,7 @@ public class RentalDTO {
         return bookId;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 }

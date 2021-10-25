@@ -5,20 +5,20 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Rental {
-    private String lendingId;
+    private String rentalId;
     private String personId;
     private String bookId;
-    private final LocalDate localDate;
+    private final LocalDate dueDate;
 
-    public Rental(String personId, String bookId, LocalDate localDate) {
-        this.lendingId = UUID.randomUUID().toString();
+    public Rental(String personId, String bookId, LocalDate dueDate) {
+        this.rentalId = UUID.randomUUID().toString();
         this.personId = personId;
         this.bookId = bookId;
-        this.localDate = localDate;
+        this.dueDate = dueDate;
     }
 
-    public void setLendingId(String lendingId) {
-        this.lendingId = lendingId;
+    public void setRentalId(String rentalId) {
+        this.rentalId = rentalId;
     }
 
     public void setPersonId(String personId) {
@@ -29,8 +29,8 @@ public class Rental {
         this.bookId = bookId;
     }
 
-    public String getLendingId() {
-        return lendingId;
+    public String getRentalId() {
+        return rentalId;
     }
 
     public String getPersonId() {
@@ -41,8 +41,8 @@ public class Rental {
         return bookId;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
     @Override
@@ -50,11 +50,11 @@ public class Rental {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rental rental = (Rental) o;
-        return Objects.equals(lendingId, rental.lendingId);
+        return Objects.equals(rentalId, rental.rentalId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lendingId);
+        return Objects.hash(rentalId);
     }
 }
