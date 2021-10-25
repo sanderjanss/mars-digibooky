@@ -1,6 +1,7 @@
 package com.switchfullygroupproject.marsdigibooky.domain.book;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
+import com.switchfullygroupproject.marsdigibooky.helperclasses.ISBN13Validator;
 
 import java.util.UUID;
 
@@ -73,6 +74,9 @@ public class Book {
     private String isbnOrNull(String isbn) {
         if (isbn == null) {
             throw new IllegalArgumentException("ISBN cant be null.");
+        }
+        if(!ISBN13Validator.isValidISBN(isbn)) {
+            throw new IllegalArgumentException("ISBN not valid");
         }
         return isbn;
     }
