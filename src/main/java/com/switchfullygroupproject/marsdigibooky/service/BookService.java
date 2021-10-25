@@ -54,7 +54,7 @@ public class BookService {
 
     public void updateBook(String uuidBook, UpdateBookDTO updateBookDTO) {
         Book book = this.bookRepository.getBookById(uuidBook);
-        Book updatedBook = new Book(book.getUuid(), book.getIsbn(), updateBookDTO.getTitle(), updateBookDTO.getAuthor(), updateBookDTO.getSummary());
+        Book updatedBook = new Book(book.getUuid(), updateBookDTO.getIsbn(), updateBookDTO.getTitle(), updateBookDTO.getAuthor(), updateBookDTO.getSummary());
         this.bookRepository.updateBook(uuidBook, updatedBook);
     }
 

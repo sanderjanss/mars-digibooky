@@ -76,7 +76,7 @@ public class LibrarianController {
             personService.findById(uuidLibrarian);
             bookService.updateBook(uuidBook, updateBookDTO);
             logger.info(String.format("Book with id %s updated", uuidBook));
-        } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
+        } catch (PersonDoesnotExistException | BookDoesNotExistException | IllegalArgumentException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
 

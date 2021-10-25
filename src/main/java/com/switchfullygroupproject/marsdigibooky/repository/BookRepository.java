@@ -28,19 +28,19 @@ public class BookRepository {
 
         //TESTDATA
         Book book1 = new Book("c340f6c3-014c-4b22-9698-9758f32e6cd1",
-                "9475640394564",
+                "ISBN 978-2-12-345680-3",
                 "De Alchemist",
                 new Author("Paulo", "Caulo"),
                 "Blablabla");
         book1.setRented(true);
         Book book2 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
-                "846574859675",
+                "ISBN 978-2-12-345680-3",
                 "Het Verdriet van België",
                 new Author("Paulo",
                         "Caulo"),
                 "Blablabla");
         Book book3 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df4f",
-                "89113256423",
+                "ISBN 978-2-12-345680-3",
                 "Sapiens",
                 new Author("Yuval Noah",
                         "Harari"),
