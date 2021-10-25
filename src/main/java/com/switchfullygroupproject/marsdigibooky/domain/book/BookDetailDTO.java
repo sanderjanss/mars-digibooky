@@ -7,9 +7,8 @@ public class BookDetailDTO {
     private  String uuid;
     private  String isbn;
     private String title;
-    private  Author author;
-    private  String summary;
-
+    private Author author;
+    private String summary;
 
 
     public String getUuid() {
@@ -56,4 +55,6 @@ public class BookDetailDTO {
         this.summary = summary;
         return this;
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.*;
+import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
+import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
 import com.switchfullygroupproject.marsdigibooky.repository.BookRepository;
 import com.switchfullygroupproject.marsdigibooky.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;

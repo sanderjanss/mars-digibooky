@@ -1,5 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
+
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.person.User;
 import com.switchfullygroupproject.marsdigibooky.exceptions.NoAuthorizationException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RentalService {

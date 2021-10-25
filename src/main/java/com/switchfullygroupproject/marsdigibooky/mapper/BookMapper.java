@@ -2,6 +2,7 @@ package com.switchfullygroupproject.marsdigibooky.mapper;
 
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.*;
+import com.switchfullygroupproject.marsdigibooky.domain.rental.Rental;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
