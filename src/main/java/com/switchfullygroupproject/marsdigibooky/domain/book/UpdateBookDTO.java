@@ -7,6 +7,9 @@ public class UpdateBookDTO {
     private Author author;
     private String summary;
 
+    public String getIsbn() {
+        return isbn;
+    }
 
     public String getTitle() {
         return title;

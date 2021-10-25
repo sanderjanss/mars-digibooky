@@ -27,8 +27,8 @@ public class Book {
 
     public Book(String uuid, String isbn, String title, Author author, String summary) {
         this.uuid = uuid;
-        this.isbn = isbn;
-        this.title = title;
+        this.isbn = isbnOrNull(isbn);
+        this.title = titleNotNull(title);
         this.author = author;
         this.summary = summary;
         this.isShowableToUser = true;
