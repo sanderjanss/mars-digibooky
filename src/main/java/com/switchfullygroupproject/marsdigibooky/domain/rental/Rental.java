@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public class Rental {
     private String rentalId;
-    private String personId;
-    private String bookId;
+    private final String personId;
+    private final String bookId;
     private final LocalDate dueDate;
 
     public Rental(String personId, String bookId, LocalDate dueDate) {

@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -61,6 +60,14 @@ public class RentalRepository {
         return overDueBooks;
     }
 
+    public String findPersonIdPerBookId(String bookId){
+        for (Map.Entry<String, Rental> entry : rentalsPerIdDatabase.entrySet()) {
+            if (entry.getValue().getBookId().equals(bookId)) {
+                return entry.getValue().getPersonId();
+            }
+        }
+        return null;
+    }
 
 
 }

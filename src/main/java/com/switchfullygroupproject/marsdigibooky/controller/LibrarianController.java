@@ -85,13 +85,13 @@ public class LibrarianController {
 
     @GetMapping(path = "/{uuidLibrarian}/getbookspermember/{uuidPerson}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<Book> getBooksPerMember(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidPerson") String uuidPerson){
+    public List<BookDTO> getBooksPerMember(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidPerson") String uuidPerson){
         return rentalService.findAllBooksPerMember(uuidLibrarian, uuidPerson);
     }
 
     @GetMapping(path = "/{uuidLibrarian}/getoverduebooks", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<Book> findAllBooksThatAreOverDue(@PathVariable("uuidLibrarian")String uuidLibrarian){
+    public List<BookDTO> findAllBooksThatAreOverDue(@PathVariable("uuidLibrarian")String uuidLibrarian){
         return rentalService.findAllBooksThatAreOverDue(uuidLibrarian);
     }
 

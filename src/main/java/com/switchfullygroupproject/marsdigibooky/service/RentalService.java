@@ -2,10 +2,12 @@ package com.switchfullygroupproject.marsdigibooky.service;
 
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
+import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.person.User;
 import com.switchfullygroupproject.marsdigibooky.exceptions.NoAuthorizationException;
 import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.exceptions.RentalException;
+import com.switchfullygroupproject.marsdigibooky.mapper.BookMapper;
 import com.switchfullygroupproject.marsdigibooky.mapper.RentalMapper;
 import com.switchfullygroupproject.marsdigibooky.repository.BookRepository;
 import com.switchfullygroupproject.marsdigibooky.repository.PersonRepository;
@@ -25,14 +27,16 @@ public class RentalService {
     private final PersonRepository personRepository;
     private final BookRepository bookRepository;
     private final RentalMapper rentalMapper;
+    private final BookMapper bookMapper;
 
 
     @Autowired
-    public RentalService(RentalRepository rentalRepository, PersonRepository personRepository, BookRepository bookRepository, RentalMapper rentalMapper) {
+    public RentalService(RentalRepository rentalRepository, PersonRepository personRepository, BookRepository bookRepository, BookMapper bookMapper, RentalMapper rentalMapper) {
         this.rentalRepository = rentalRepository;
         this.personRepository = personRepository;
         this.bookRepository = bookRepository;
         this.rentalMapper = rentalMapper;
+        this.bookMapper = bookMapper;
     }
 
 
@@ -71,7 +75,7 @@ public class RentalService {
         bookRepository.updateRentalStatusToFalse(bookId);
     }
 
-    public List<Book> findAllBooksPerMember(String librarianId, String memberId){
+    public List<BookDTO> findAllBooksPerMember(String librarianId, String memberId){
         if (personRepository.findById(librarianId) == null) {
             throw new PersonDoesnotExistException("This librarian Id does not exist.");
         }
@@ -84,17 +88,17 @@ public class RentalService {
         if (personRepository.findById(memberId).getUser() != User.MEMBER) {
             throw new NoAuthorizationException("No authorization, this id does not belong to a member.");
         }
-        return bookRepository.getBooksByIds(rentalRepository.findBookIdsPerUser(memberId));
+        return bookMapper.toBookDTO(bookRepository.getBooksByIds(rentalRepository.findBookIdsPerUser(memberId)));
     }
 
-    public List<Book> findAllBooksThatAreOverDue(String librarianId){
+    public List<BookDTO> findAllBooksThatAreOverDue(String librarianId){
         if (personRepository.findById(librarianId) == null) {
             throw new PersonDoesnotExistException("This librarian Id does not exist.");
         }
         if (personRepository.findById(librarianId).getUser() != User.LIBRARIAN) {
             throw new NoAuthorizationException("No authorization, this id does not belong to a librarian.");
         }
-        return bookRepository.getBooksByIds(rentalRepository.findBookIdsThatAreOverDue());
+        return bookMapper.toBookDTO(bookRepository.getBooksByIds(rentalRepository.findBookIdsThatAreOverDue()));
     }
 
 
