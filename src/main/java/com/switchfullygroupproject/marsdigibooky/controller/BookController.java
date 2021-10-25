@@ -1,18 +1,14 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
-import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
-import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.service.BookService;
-import com.switchfullygroupproject.marsdigibooky.service.PersonService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -23,17 +19,15 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
-    private final PersonService personService;
     private final Logger logger;
 
     @Autowired
-    public BookController(BookService bookService, PersonService personService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.personService = personService;
         this.logger = LoggerFactory.getLogger(BookController.class);
     }
 
-    @GetMapping(path = "/{uuid}",  produces = "application/json")
+    @GetMapping(path = "/{uuid}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDetailDTO getBookById(@PathVariable String uuid) {
         try {
@@ -47,9 +41,9 @@ public class BookController {
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<BookDetailDTO> getBooks(@RequestParam(name = "isbn", required = false) String isbnOrNull,
-                                        @RequestParam(name= "title", required = false) String titleOrNull,
-                                        @RequestParam(name= "authorFirstName", required = false) String firstNameOrNull,
-                                        @RequestParam(name= "authorLastName", required = false) String lastNameOrNull) {
+                                        @RequestParam(name = "title", required = false) String titleOrNull,
+                                        @RequestParam(name = "authorFirstName", required = false) String firstNameOrNull,
+                                        @RequestParam(name = "authorLastName", required = false) String lastNameOrNull) {
 
         try {
             return this.bookService.getAllBooks(isbnOrNull, titleOrNull, firstNameOrNull, lastNameOrNull);

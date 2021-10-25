@@ -1,6 +1,5 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
-import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.UpdateBookDTO;
@@ -71,7 +70,7 @@ public class LibrarianController {
 
     @PutMapping(path = "/{uuidLibrarian}/updatebook/{uuidBook}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO){
+    public void updateBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO) {
         try {
             personService.findById(uuidLibrarian);
             bookService.updateBook(uuidBook, updateBookDTO);
@@ -85,14 +84,18 @@ public class LibrarianController {
 
     @GetMapping(path = "/{uuidLibrarian}/getbookspermember/{uuidPerson}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<BookDTO> getBooksPerMember(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidPerson") String uuidPerson){
-        return rentalService.findAllBooksPerMember(uuidLibrarian, uuidPerson);
+    public List<BookDTO> getBooksPerMember(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidPerson") String uuidPerson) {
+        List<BookDTO> booksPerMember = rentalService.findAllBooksPerMember(uuidLibrarian, uuidPerson);
+        logger.info(String.format("Books from member with id %s retrieved by librarian with id %s", uuidPerson, uuidLibrarian));
+        return booksPerMember;
     }
 
     @GetMapping(path = "/{uuidLibrarian}/getoverduebooks", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<BookDTO> findAllBooksThatAreOverDue(@PathVariable("uuidLibrarian")String uuidLibrarian){
-        return rentalService.findAllBooksThatAreOverDue(uuidLibrarian);
+    public List<BookDTO> findAllBooksThatAreOverDue(@PathVariable("uuidLibrarian") String uuidLibrarian) {
+        List<BookDTO> booksOverdue = rentalService.findAllBooksThatAreOverDue(uuidLibrarian);
+        logger.info(String.format("Books that are overdue retrieved by librarian with id %s", uuidLibrarian));
+        return booksOverdue;
     }
 
 }

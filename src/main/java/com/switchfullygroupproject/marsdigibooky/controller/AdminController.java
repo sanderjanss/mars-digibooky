@@ -15,29 +15,25 @@ import java.util.List;
 @RequestMapping("/admins")
 public class AdminController {
     private final PersonService personService;
-    public final Logger logger = LoggerFactory.getLogger(PersonController.class);
+    public final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     public AdminController(PersonService personService) {
         this.personService = personService;
     }
 
-    //NOT VALIDATED YET WITH ADMINID
-    @GetMapping(path = "/finduser/{userid}", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public PersonDTO findById(@PathVariable String userid) {
-        return personService.findById(userid);
-    }
-
     @GetMapping(path = "/{id}/allmembers", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<PersonDTO> findAllMembers(@PathVariable String id) {
-        return personService.findAllMembers(id);
+        List<PersonDTO> allMembers = personService.findAllMembers(id);
+        logger.info(String.format("Retrieved all members by admin with id %s", id));
+        return allMembers;
     }
 
     @PostMapping(path = "/{id}/registeradminorlibrarian", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerAdminOrLibrarian(@RequestBody PersonDTO personDTO, @PathVariable String id) {
         personService.registerAdmin(personDTO, id);
+        logger.info(String.format("Registered a new admin/librarian by admin with id %s", id));
     }
 }
