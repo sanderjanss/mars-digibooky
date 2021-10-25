@@ -69,4 +69,19 @@ public class Book {
     public void setShowableToUser(boolean showableToUser) {
         isShowableToUser = showableToUser;
     }
+
+    private String isbnOrNull(String isbn) {
+        if (isbn == null) {
+            throw new IllegalArgumentException("ISBN cant be null.");
+        }
+        return isbn;
+    }
+
+    private String titleNotNull(String title) {
+        if (title == null) {
+            throw new IllegalArgumentException("Title cant be null.");
+        }
+            return title;
+    }
+
 }

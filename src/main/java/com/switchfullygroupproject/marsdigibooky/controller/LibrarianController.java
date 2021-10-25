@@ -40,7 +40,7 @@ public class LibrarianController {
             personService.findById(uuid);
             BookDTO bookDTO = this.bookService.registerBook(createBookDTO);
             logger.info(String.format("Book registered: %s", bookDTO.getUuid()));
-        } catch (PersonDoesnotExistException exception) {
+        } catch (PersonDoesnotExistException | IllegalArgumentException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
     }
