@@ -1,5 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
+import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.book.UpdateBookDTO;
@@ -7,11 +8,14 @@ import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistExce
 import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.service.BookService;
 import com.switchfullygroupproject.marsdigibooky.service.PersonService;
+import com.switchfullygroupproject.marsdigibooky.service.RentalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -20,11 +24,13 @@ public class LibrarianController {
 
     private final BookService bookService;
     private final PersonService personService;
+    private final RentalService rentalService;
     public final Logger logger = LoggerFactory.getLogger(LibrarianController.class);
 
-    public LibrarianController(BookService bookService, PersonService personService) {
+    public LibrarianController(BookService bookService, PersonService personService, RentalService rentalService) {
         this.bookService = bookService;
         this.personService = personService;
+        this.rentalService = rentalService;
     }
 
     @PostMapping(path = "/{uuid}/registerbook", consumes = "application/json", produces = "application/json")
@@ -69,5 +75,17 @@ public class LibrarianController {
         bookService.updateBook(uuidBook, updateBookDTO);
     }
 
+
+    @GetMapping(path = "/{uuidLibrarian}/getbookspermember/{uuidPerson}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Book> getBooksPerMember(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidPerson") String uuidPerson){
+        return rentalService.findAllBooksPerMember(uuidLibrarian, uuidPerson);
+    }
+
+    @GetMapping(path = "/{uuidLibrarian}/getoverduebooks", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Book> findAllBooksThatAreOverDue(@PathVariable("uuidLibrarian")String uuidLibrarian){
+        return rentalService.findAllBooksThatAreOverDue(uuidLibrarian);
+    }
 
 }

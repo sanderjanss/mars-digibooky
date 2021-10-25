@@ -3,11 +3,15 @@ package com.switchfullygroupproject.marsdigibooky.repository;
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
 import com.switchfullygroupproject.marsdigibooky.domain.book.UpdateBookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
+import com.switchfullygroupproject.marsdigibooky.domain.person.User;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -26,6 +30,7 @@ public class BookRepository {
                 "De Alchemist",
                 new Author("Paulo", "Caulo"),
                 "Blablabla");
+        book1.setRented(true);
         Book book2 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
                 "846574859675",
                 "Het Verdriet van België",
@@ -60,6 +65,18 @@ public class BookRepository {
             throw new BookDoesNotExistException(String.format("Book with uuid %s not found", uuid));
         }
         return foundBook;
+    }
+
+    public List<Book> getBooksByIds(List<String> bookIds) {
+        List<Book> bookList = new ArrayList<>();
+        for (Map.Entry<String, Book> entry : booksById.entrySet()) {
+            for (String bookId : bookIds) {
+                if (entry.getValue().getUuid().equals(bookId)) {
+                    bookList.add(entry.getValue());
+                }
+            }
+        }
+        return bookList;
     }
 
     public Book getBookByIdAsLibrarian(String uuid) {
