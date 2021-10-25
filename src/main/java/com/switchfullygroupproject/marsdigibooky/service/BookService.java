@@ -2,6 +2,8 @@ package com.switchfullygroupproject.marsdigibooky.service;
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.*;
 import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
+import com.switchfullygroupproject.marsdigibooky.domain.person.User;
+import com.switchfullygroupproject.marsdigibooky.exceptions.NoAuthorizationException;
 import com.switchfullygroupproject.marsdigibooky.exceptions.PersonDoesnotExistException;
 import com.switchfullygroupproject.marsdigibooky.repository.BookRepository;
 import com.switchfullygroupproject.marsdigibooky.mapper.BookMapper;
@@ -39,20 +41,32 @@ public class BookService {
         return bookMapper.toBookDetailDTO(bookRepository.getBookById(uuid));
     }
 
-    public BookDTO registerBook(CreateBookDTO createBookDTO) {
+    public BookDTO registerBook(String uuid, CreateBookDTO createBookDTO) {
+        if(personRepository.findById(uuid).getUser() != User.LIBRARIAN){
+            throw new NoAuthorizationException("A book can only be registered by a librarian.");
+        }
         Book book = bookRepository.registerBook(this.bookMapper.toBook(createBookDTO));
         return this.bookMapper.toBookDTO(book);
     }
 
-    public void deleteBook(String uuidBook) {
+    public void deleteBook(String librarianUuid, String uuidBook) {
+        if(personRepository.findById(librarianUuid).getUser() != User.LIBRARIAN){
+            throw new NoAuthorizationException("A book can only be deleted by a librarian.");
+        }
         this.bookRepository.deleteBook(uuidBook);
     }
 
-    public void unDeleteBook(String uuidBook) {
+    public void unDeleteBook(String uuidLibrarian, String uuidBook) {
+        if(personRepository.findById(uuidLibrarian).getUser() != User.LIBRARIAN){
+            throw new NoAuthorizationException("A book can only be undeleted by a librarian.");
+        }
         this.bookRepository.unDeleteBook(uuidBook);
     }
 
-    public void updateBook(String uuidBook, UpdateBookDTO updateBookDTO) {
+    public void updateBook(String uuidLibrarian, String uuidBook, UpdateBookDTO updateBookDTO) {
+        if(personRepository.findById(uuidLibrarian).getUser() != User.LIBRARIAN){
+            throw new NoAuthorizationException("A book can only be updated by a librarian.");
+        }
         Book book = this.bookRepository.getBookById(uuidBook);
         Book updatedBook = new Book(book.getUuid(), updateBookDTO.getIsbn(), updateBookDTO.getTitle(), updateBookDTO.getAuthor(), updateBookDTO.getSummary());
         this.bookRepository.updateBook(uuidBook, updatedBook);

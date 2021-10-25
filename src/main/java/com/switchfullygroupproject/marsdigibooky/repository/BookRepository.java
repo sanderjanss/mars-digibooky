@@ -33,6 +33,7 @@ public class BookRepository {
                 new Author("Paulo", "Coelho"),
                 "De jonge schaapherder Santiago heeft één grote wens: " +
                         "de wereld bereizen tot in alle uithoeken om zo uit te vinden hoe deze in elkaar zit");
+        book1.setRented(true);
         Book book2 = new Book("86c5e7a3-d0e2-48bd-bfdb-b04e0324df5f",
                 "ISBN 978-2-12-345680-3",
                 "Het Verdriet van België",

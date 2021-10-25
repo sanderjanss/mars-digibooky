@@ -37,7 +37,7 @@ public class LibrarianController {
     public void registerBook(@RequestBody CreateBookDTO createBookDTO, @PathVariable String uuid) {
         try {
             personService.findById(uuid);
-            BookDTO bookDTO = this.bookService.registerBook(createBookDTO);
+            BookDTO bookDTO = this.bookService.registerBook(uuid, createBookDTO);
             logger.info(String.format("Book registered: %s", bookDTO.getUuid()));
         } catch (PersonDoesnotExistException | IllegalArgumentException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
@@ -49,7 +49,7 @@ public class LibrarianController {
     public void deleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
         try {
             personService.findById(uuidLibrarian);
-            this.bookService.deleteBook(uuidBook);
+            this.bookService.deleteBook(uuidLibrarian, uuidBook);
             logger.info(String.format("Book with id %s deleted", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
@@ -61,7 +61,7 @@ public class LibrarianController {
     public void undeleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
         try {
             personService.findById(uuidLibrarian);
-            this.bookService.unDeleteBook(uuidBook);
+            this.bookService.unDeleteBook(uuidLibrarian, uuidBook);
             logger.info(String.format("Book with id %s undeleted", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
@@ -73,7 +73,7 @@ public class LibrarianController {
     public void updateBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO) {
         try {
             personService.findById(uuidLibrarian);
-            bookService.updateBook(uuidBook, updateBookDTO);
+            bookService.updateBook(uuidLibrarian ,uuidBook, updateBookDTO);
             logger.info(String.format("Book with id %s updated", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException | IllegalArgumentException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
