@@ -23,12 +23,12 @@ public class PersonService {
         this.personMapper = personMapper;
     }
 
-    public PersonDTO findById(String uuid){
+    public PersonDTO findById(String uuid) {
         return personMapper.toDto(personRepository.findById(uuid));
     }
 
-    public List<PersonDTO> findAllMembers(String id){
-        if(personRepository.findById(id) == null){
+    public List<PersonDTO> findAllMembers(String id) {
+        if (personRepository.findById(id) == null) {
             throw new PersonDoesnotExistException("This person id does not exist.");
         }
 
@@ -40,21 +40,27 @@ public class PersonService {
     }
 
 
-    public void registerMember(PersonDTO personDTO){
-        if(personDTO.getUser() != User.MEMBER){
+    public void registerMember(PersonDTO personDTO) {
+        if (personDTO == null) {
+            throw new PersonDoesnotExistException("This person id does not exist.");
+        }
+        if (personDTO.getUser() != User.MEMBER) {
             throw new NoAuthorizationException("You can only register yourself as a member.");
         }
         personRepository.registerMember(personMapper.toPerson(personDTO));
     }
 
-    public void registerAdmin(PersonDTO personDTO, String id){
-        if(personRepository.findById(id) == null){
+    public void registerAdmin(PersonDTO personDTO, String id) {
+        if (personDTO == null) {
+            throw new PersonDoesnotExistException("This person id does not exist.");
+        }
+        if (personRepository.findById(id) == null) {
             throw new PersonDoesnotExistException("This person id does not exist.");
         }
         if (personRepository.findById(id).getUser() != User.ADMIN) {
             throw new NoAuthorizationException("Only an admin can register admins and librarians.");
         }
-        if(personDTO.getUser() == User.MEMBER){
+        if (personDTO.getUser() == User.MEMBER) {
             throw new NoAuthorizationException("Only admins and librarians can be created.");
         }
         personRepository.registerAdmin(personMapper.toPerson(personDTO));
