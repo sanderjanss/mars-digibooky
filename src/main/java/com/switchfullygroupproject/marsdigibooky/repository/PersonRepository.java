@@ -65,7 +65,7 @@ public class PersonRepository {
         }
     }
 
-    public void registerAdmin(Person person, String id) {
+    public void registerAdmin(Person person) {
             if (userAllreadyPartOfDatabase(person)) {
                 personsPerIdDatabase.put(person.getUuid(), person);
             }

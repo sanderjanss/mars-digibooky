@@ -57,6 +57,6 @@ public class PersonService {
         if(personDTO.getUser() == User.MEMBER){
             throw new NoAuthorizationException("Only admins and librarians can be created.");
         }
-        personRepository.registerAdmin(personMapper.toPerson(personDTO), id);
+        personRepository.registerAdmin(personMapper.toPerson(personDTO));
     }
 }
