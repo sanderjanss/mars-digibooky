@@ -2,6 +2,7 @@ package com.switchfullygroupproject.marsdigibooky.repository;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
+import com.switchfullygroupproject.marsdigibooky.domain.book.UpdateBookDTO;
 import com.switchfullygroupproject.marsdigibooky.exceptions.BookDoesNotExistException;
 import com.switchfullygroupproject.marsdigibooky.helperclasses.WildCardValidator;
 import org.springframework.stereotype.Component;
@@ -84,6 +85,9 @@ public class BookRepository {
         book.setShowableToUser(true);
     }
 
+    public void updateBook(String uuidBook, Book book) {
+        booksById.put(uuidBook, book);
+    }
 
     //HELPER METHODS
 
@@ -98,4 +102,6 @@ public class BookRepository {
     public void updateRentalStatusToFalse(String bookId) {
         booksById.get(bookId).setRented(false);
     }
+
+
 }

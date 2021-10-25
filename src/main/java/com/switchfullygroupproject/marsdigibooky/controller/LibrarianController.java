@@ -66,7 +66,7 @@ public class LibrarianController {
     @PutMapping(path = "/{uuidLibrarian}/updatebook/{uuidBook}")
     @ResponseStatus(HttpStatus.OK)
     public void updateBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook, @RequestBody UpdateBookDTO updateBookDTO){
-
+        bookService.updateBook(uuidBook, updateBookDTO);
     }
 
 

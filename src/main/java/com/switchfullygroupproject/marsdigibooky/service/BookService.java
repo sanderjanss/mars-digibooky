@@ -1,9 +1,6 @@
 package com.switchfullygroupproject.marsdigibooky.service;
 
-import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.*;
 import com.switchfullygroupproject.marsdigibooky.repository.BookRepository;
 import com.switchfullygroupproject.marsdigibooky.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +42,11 @@ public class BookService {
 
     public void unDeleteBook(String uuidBook) {
         this.bookRepository.unDeleteBook(uuidBook);
+    }
+
+    public void updateBook(String uuidBook, UpdateBookDTO updateBookDTO) {
+        Book book = this.bookRepository.getBookById(uuidBook);
+        Book updatedBook = new Book(book.getUuid(), book.getIsbn(), updateBookDTO.getTitle(), updateBookDTO.getAuthor(), updateBookDTO.getSummary());
+        this.bookRepository.updateBook(uuidBook, updatedBook);
     }
 }

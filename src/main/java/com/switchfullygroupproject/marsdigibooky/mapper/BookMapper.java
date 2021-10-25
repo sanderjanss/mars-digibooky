@@ -1,10 +1,7 @@
 package com.switchfullygroupproject.marsdigibooky.mapper;
 
 
-import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
-import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
