@@ -1,6 +1,7 @@
 package com.switchfullygroupproject.marsdigibooky.controller;
 
 import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTOV2;
+import com.switchfullygroupproject.marsdigibooky.domain.person.PersonDTO;
 import com.switchfullygroupproject.marsdigibooky.service.BookService;
 import com.switchfullygroupproject.marsdigibooky.service.RentalService;
 import org.slf4j.Logger;
@@ -8,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -45,5 +49,16 @@ public class MemberController {
         BookDetailDTOV2 bookDetail = bookService.findBookIfRentedReturnBookDetailDTO(memberId, bookId);
         logger.info(String.format("Bookdetails with id %s from member with id %s showed.", bookId, memberId));
         return bookDetail;
+    }
+
+    @GetMapping(path = "/{id}/allmembers", produces = "application/json")
+    public List<PersonDTO> findAllMembers(@PathVariable String id) {
+      throw new ResponseStatusException(HttpStatus.FORBIDDEN," Only admin can see all members!");
+    }
+
+    @PostMapping(path = "/{id}/registeradminorlibrarian", produces = "application/json", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerAdminOrLibrarian(@RequestBody PersonDTO personDTO, @PathVariable String id) {
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN," Only admin can register a librarian or an admin!");
     }
 }
