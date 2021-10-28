@@ -62,6 +62,10 @@ public class BookRepository {
     }
 
     public Collection<Book> getAllBooks(String isbnOrNull, String titleOrNull, String authorFirstNameOrNull, String authorLastNameOrNull) {
+        // CODEREVIEW streaming over the values like this:
+        // this.booksById.values().stream()
+        // is much more convenient. You will also not run into problems with variable naming
+        // note how much intellij helps you with this
         return this.booksById.entrySet().stream()
                 .filter(set -> set.getValue().isShowableToUser())
                 .filter(set -> isbnOrNull == null || WildCardValidator.match(isbnOrNull, set.getValue().getIsbn()))
@@ -81,6 +85,8 @@ public class BookRepository {
     }
 
     public List<Book> getBooksByIds(List<String> bookIds) {
+        // CODEREVIEW expensive and unnecessary double loop here
+        // there are many possible implementations that avoid this
         List<Book> bookList = new ArrayList<>();
         for (Map.Entry<String, Book> entry : booksById.entrySet()) {
             for (String bookId : bookIds) {

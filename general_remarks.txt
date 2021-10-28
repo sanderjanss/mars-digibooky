@@ -1,1 +1,2 @@
-*
+* most code is clean: good job!
+* a large part of your code base feels very consistent: i cannot tell there were multiple authors: good job!

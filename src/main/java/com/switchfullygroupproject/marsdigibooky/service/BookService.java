@@ -17,6 +17,7 @@ import java.util.List;
 
 
 @Service
+// CODEREVIEW why is this here?
 @ComponentScan(basePackages = "com.switchfullygroupproject.marsdigibooky")
 public class BookService {
 

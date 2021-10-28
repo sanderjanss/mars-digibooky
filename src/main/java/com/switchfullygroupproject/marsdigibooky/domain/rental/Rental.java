@@ -14,6 +14,7 @@ public class Rental {
         this.rentalId = UUID.randomUUID().toString();
         this.personId = personId;
         this.bookId = bookId;
+        // CODEREVIEW weird thing to do: you call your parameter dueDate but expect people to pass LocalDate.now()
         this.dueDate = dueDate.plusWeeks(3);
     }
 
