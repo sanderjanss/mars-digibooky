@@ -11,7 +11,17 @@ import com.switchfullygroupproject.marsdigibooky.service.RentalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -36,19 +46,19 @@ public class LibrarianController {
     @ResponseStatus(HttpStatus.CREATED)
     public void registerBook(@RequestBody CreateBookDTO createBookDTO, @PathVariable String uuid) {
         try {
-            personService.findById(uuid);
+            personService.findById(uuid); // CODEREVIEW this method call does nothing
             BookDTO bookDTO = this.bookService.registerBook(uuid, createBookDTO);
             logger.info(String.format("Book registered: %s", bookDTO.getUuid()));
-        } catch (PersonDoesnotExistException | IllegalArgumentException exception) {
+        } catch (PersonDoesnotExistException | IllegalArgumentException exception) { // CODEREVIEW is FORBIDDEN a good response for an IllegalArgumentException ?
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage());
         }
     }
 
     @DeleteMapping(path = "/{uuidLibrarian}/deletebook/{uuidBook}")
-    @ResponseStatus(HttpStatus.GONE)
+    @ResponseStatus(HttpStatus.GONE) // CODEREVIEW GONE is an error code: your user will assume something went wrong. OK (200) is a correct response code
     public void deleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
         try {
-            personService.findById(uuidLibrarian);
+            personService.findById(uuidLibrarian); // CODEREVIEW this method call does nothing
             this.bookService.deleteBook(uuidLibrarian, uuidBook);
             logger.info(String.format("Book with id %s deleted", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {
@@ -60,7 +70,7 @@ public class LibrarianController {
     @ResponseStatus(HttpStatus.OK)
     public void undeleteBook(@PathVariable("uuidLibrarian") String uuidLibrarian, @PathVariable("uuidBook") String uuidBook) {
         try {
-            personService.findById(uuidLibrarian);
+            personService.findById(uuidLibrarian); // CODEREVIEW this method call does nothing
             this.bookService.unDeleteBook(uuidLibrarian, uuidBook);
             logger.info(String.format("Book with id %s undeleted", uuidBook));
         } catch (PersonDoesnotExistException | BookDoesNotExistException exception) {

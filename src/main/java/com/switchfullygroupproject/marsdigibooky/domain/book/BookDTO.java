@@ -25,6 +25,7 @@ public class BookDTO {
         return author;
     }
 
+    // CODEREVIEW fluent setters are very uncommon on actual classes. It's better to include a Builder
     public BookDTO setUuid(String uuid) {
         this.uuid = uuid;
         return this;

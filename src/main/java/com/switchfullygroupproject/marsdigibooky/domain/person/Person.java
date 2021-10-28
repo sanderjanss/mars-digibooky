@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class Person {
     private String uuid;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // CODEREVIEW what is this doing here ?
     private final String inss;
     private final String firstName;
     private final String lastName;
@@ -67,7 +67,7 @@ public class Person {
         throw new IllegalArgumentException("Last name cant be null.");
     }
 
-
+    // CODEREVIEW kudos on not trying to do email validation yourselves. Note that even the class you use mentions it cannot really validate email addresses
     public String isValidEmailAddress(String email) {
         try {
             InternetAddress emailAddr = new InternetAddress(email);

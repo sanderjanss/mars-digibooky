@@ -2,7 +2,9 @@ package com.switchfullygroupproject.marsdigibooky.helperclasses;
 
 public class WildCardValidator {
 
-
+    // CODEREVIEW I am assuming you found this code on the internet? If not, very creative use of recursion
+    // if you did, be sure to mention where you found it
+    // also, try searching for a library to include as a maven dependency instead of copying code from the internet
     public static boolean match(String first, String second) {
 
         if (first.length() == 0 && second.length() == 0)

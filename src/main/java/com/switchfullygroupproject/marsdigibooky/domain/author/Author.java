@@ -17,8 +17,10 @@ public class Author {
         return lastName;
     }
 
-
+    // CODEREVIEW a weird method name. validateAuthorLastName or assertAuthorLastNameIsPresent or something similar is more communicative
     public String authorLastName(String lastName) {
+        // CODEREVIEW it's a bit confusing that you "turn this method around"
+        // look at how you implement Book.titleNotNull
         if (!(lastName == null)) {
             return lastName;
         }

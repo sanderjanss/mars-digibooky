@@ -17,6 +17,7 @@ public class RentalDTO {
         this.dueDate = dueDate.plusWeeks(3);
     }
 
+    // CODEREVIEW unused setter
     public void setRentalId(String rentalId) {
         this.rentalId = rentalId;
     }

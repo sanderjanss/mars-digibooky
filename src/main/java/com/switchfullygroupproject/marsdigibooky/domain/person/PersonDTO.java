@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PersonDTO {
 
     private String uuid;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // CODEREVIEW what is this doing here ?
     private String inss;
     private final String firstName;
     private final String lastName;
