@@ -2,6 +2,7 @@ package com.switchfullygroupproject.marsdigibooky.domain.book;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
 
+// CODEREVIEW why work with fluent setters? (2)
 public class BookDetailDTO {
 
     private String uuid;

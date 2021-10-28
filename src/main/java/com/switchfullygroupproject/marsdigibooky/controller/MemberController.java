@@ -8,7 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -30,7 +37,7 @@ public class MemberController {
 
     @PostMapping(path = "/{memberId}/lendbook/{bookId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void lendBookV2(@PathVariable String memberId, @PathVariable String bookId) {
+    public void lendBookV2(@PathVariable String memberId, @PathVariable String bookId) { // CODEREVIEW what a strange method name
         rentalService.lendBook(memberId, bookId);
         logger.info(String.format("Book with id %s, rented by member with id %s", bookId, memberId));
     }
@@ -46,6 +53,8 @@ public class MemberController {
     @GetMapping(path = "/{memberId}/showbookdetails/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDetailDTOV2 showBookDetails(@PathVariable String memberId, @PathVariable String bookId) {
+        // CODEREVIEW there's no real value to include information in the method name about "ifRented"
+        // also it doesn not really clarify on its own what is meant. I initially interpreted it as: if the book is not rented, this method return nothing
         BookDetailDTOV2 bookDetail = bookService.findBookIfRentedReturnBookDetailDTO(memberId, bookId);
         logger.info(String.format("Bookdetails with id %s from member with id %s showed.", bookId, memberId));
         return bookDetail;

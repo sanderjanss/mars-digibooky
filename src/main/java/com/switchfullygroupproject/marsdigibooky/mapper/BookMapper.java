@@ -1,7 +1,11 @@
 package com.switchfullygroupproject.marsdigibooky.mapper;
 
 
-import com.switchfullygroupproject.marsdigibooky.domain.book.*;
+import com.switchfullygroupproject.marsdigibooky.domain.book.Book;
+import com.switchfullygroupproject.marsdigibooky.domain.book.BookDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTO;
+import com.switchfullygroupproject.marsdigibooky.domain.book.BookDetailDTOV2;
+import com.switchfullygroupproject.marsdigibooky.domain.book.CreateBookDTO;
 import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class BookMapper {
 
+    // CODEREVIEW unused method
     public List<BookDetailDTO> toBookDetailDTO(List<Book> bookList) {
         return bookList.stream()
                 .map(this::toBookDetailDTO)

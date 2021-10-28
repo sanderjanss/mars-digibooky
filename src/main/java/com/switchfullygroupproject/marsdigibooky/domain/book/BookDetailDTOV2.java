@@ -1,8 +1,10 @@
 package com.switchfullygroupproject.marsdigibooky.domain.book;
 
 import com.switchfullygroupproject.marsdigibooky.domain.author.Author;
-import com.switchfullygroupproject.marsdigibooky.domain.person.Person;
 
+// CODEREVIEW not a very descriptive class name
+// Why have 3 classes BookDTO, BookDetailDTO and BookDetailDTOV2 ?
+// it is more conventional to just have 1 and fill in only the fields that are relevant for your specific controller method
 public class BookDetailDTOV2 {
 
     private String uuid;

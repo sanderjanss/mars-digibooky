@@ -12,7 +12,7 @@ public class Book {
     private final String title;
     private final Author author;
     private final String summary;
-    private boolean isRented;
+    private boolean isRented; // CODEREVIEW data duplication
     private boolean isShowableToUser;
 
     public Book(String isbn, String title, Author author, String summary) {
@@ -71,6 +71,7 @@ public class Book {
         isShowableToUser = showableToUser;
     }
 
+    // CODEREVIEW weird method name
     private String isbnOrNull(String isbn) {
         if (isbn == null) {
             throw new IllegalArgumentException("ISBN cant be null.");

@@ -30,6 +30,8 @@ public class Address {
     }
 
     public String cityNotNull(String city) {
+        // CODEREVIEW it's a bit confusing that you "turn this method around"
+        // look at how you implement Book.titleNotNull
         if (!(city == null)) {
             return city;
         }

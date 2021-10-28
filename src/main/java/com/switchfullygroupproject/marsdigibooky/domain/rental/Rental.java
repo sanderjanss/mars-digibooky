@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Rental {
-    private String rentalId;
+    private String rentalId; // CODEREVIEW if any field is final, surely it's the ID
     private final String personId;
     private final String bookId;
     private final LocalDate dueDate;
@@ -14,9 +14,11 @@ public class Rental {
         this.rentalId = UUID.randomUUID().toString();
         this.personId = personId;
         this.bookId = bookId;
+        // CODEREVIEW weird thing to do: you call your parameter dueDate but expect people to pass LocalDate.now()
         this.dueDate = dueDate.plusWeeks(3);
     }
 
+    // CODEREVIEW this is a horrible bug the rentalId is used in your equals and hashcode implementation!!
     public void setRentalId(String rentalId) {
         this.rentalId = rentalId;
     }
